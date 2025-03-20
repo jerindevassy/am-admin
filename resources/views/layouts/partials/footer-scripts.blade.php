@@ -57,6 +57,9 @@
 		}
 		$('#editsize_modal').modal('show');
 	});
+  $(document).on('click', '.close, .btn-secondary', function () {
+    $('#editsize_modal').modal('hide');
+});
 
  
   $(document).on('click', '.edit_occasians', function () {
@@ -78,6 +81,9 @@
 		}
 		$('#editoccasians_modal').modal('show');
 	});
+  $(document).on('click', '.close, .btn-secondary', function () {
+    $('#editoccasians_modal').modal('hide');
+});
 
 
   $('.edit_return').click(function(){
@@ -102,6 +108,9 @@
     });
 
 	
+    $(document).on('click', '.close, .btn-secondary', function () {
+    $('#editreturn_modal').modal('hide');
+});
 
 	
     </script>
