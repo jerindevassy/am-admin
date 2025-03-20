@@ -25,6 +25,25 @@
             <span class="pc-mtext">Agent Registration</span>
           </a>
         </li>
+       
+        <li class="pc-item pc-hasmenu">
+          <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Masters
+              </span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li class="pc-item"><a class="pc-link" href="{{url('size')}}">Size</a></li>
+            <li class="pc-item"><a class="pc-link" href="{{url('occasions')}}">Occasions</a></li></ul>
+        <li class="pc-item">
+          <a href="{{url('customer')}}" class="pc-link">
+            <span class="pc-micon"><i class="nav-icon fas fa-user"></i></span>
+            <span class="pc-mtext">Customers</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a href="{{url('orders')}}" class="pc-link">
+            <span class="pc-micon"><i class="nav-icon fas fa-user"></i></span>
+            <span class="pc-mtext">Orders</span>
+          </a>
+        </li>
         <li class="pc-item">
           <a href="../elements/bc_color.html" class="pc-link">
             <span class="pc-micon"><i class="ti ti-color-swatch"></i></span>
