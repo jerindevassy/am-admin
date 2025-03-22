@@ -114,7 +114,7 @@
        <td>{{ $i }}</td>
       
        <td>{{$key->category_name}}</td>
-       <td>        <img src="{{ asset('/images/'.$key->category_image) }}" alt="" width="200" height="100" />
+       <td>        <img src="{{ asset('/images/categories/'.$key->category_image) }}" alt="" width="200" height="100" />
        </td>
 
    

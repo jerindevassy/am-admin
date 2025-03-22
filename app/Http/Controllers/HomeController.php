@@ -241,7 +241,7 @@ class HomeController extends Controller
         $mark->cat_id = $request->input("catid");
         if ($files = $request->file("subcategoryimage")) {
             $name = $files->getClientOriginalName();
-            $files->move("images/", $name);
+            $files->move("images/categories/", $name);
 
             $mark->category_image = $name;
             $mark->save();}
@@ -265,7 +265,7 @@ class HomeController extends Controller
 
         if ($files = $request->file("subcategoryimage")) {
             $name = $files->getClientOriginalName();
-            $files->move("images/", $name);
+            $files->move("images/categories/", $name);
             $markk->category_image = $name;
 
         }
@@ -291,7 +291,7 @@ class HomeController extends Controller
         $mark->category_name = $request->category_name;
         if ($files = $request->file("categoryimage")) {
             $name = $files->getClientOriginalName();
-            $files->move("images/", $name);
+            $files->move("images/categories/", $name);
 
             $mark->category_image = $name;
             $mark->save();}
@@ -315,7 +315,7 @@ class HomeController extends Controller
 
         if ($files = $request->file("categoryimage")) {
             $name = $files->getClientOriginalName();
-            $files->move("images/", $name);
+            $files->move("images/categories/", $name);
             $markk->category_image = $name;
 
         }
