@@ -48,3 +48,18 @@ Route::post('/orderstatusfetch', [App\Http\Controllers\HomeController::class, 'o
 Route::post('/orderstatusedit', [App\Http\Controllers\HomeController::class, 'orderstatusedit'])->name('orderstatusedit');
 
 Route::get('/orders', [App\Http\Controllers\HomeController::class, 'orders'])->name('orders');
+Route::get('/vieworderitems/{orderId}', [App\Http\Controllers\HomeController::class, 'vieworderitems'])->name('vieworderitems');
+
+Route::get('/subcategory/{catId}/{categoryname}', [App\Http\Controllers\HomeController::class, 'subcategory'])->name('subcategory');
+
+Route::post('/subcategoryinsert', [App\Http\Controllers\HomeController::class, 'subcategoryinsert'])->name('subcategoryinsert');
+
+Route::post('/subcategoryfetch', [App\Http\Controllers\HomeController::class, 'subcategoryfetch'])->name('subcategoryfetch');
+
+Route::post('/subcategoryedit', [App\Http\Controllers\HomeController::class, 'subcategoryedit'])->name('subcategoryedit');
+Route::get('/category', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
+
+Route::post('/categoryinsert', [App\Http\Controllers\HomeController::class, 'categoryinsert'])->name('categoryinsert');
+Route::post('/categoryfetch', [App\Http\Controllers\HomeController::class, 'categoryfetch'])->name('categoryfetch');
+
+Route::post('/categoryedit', [App\Http\Controllers\HomeController::class, 'categoryedit'])->name('categoryedit');

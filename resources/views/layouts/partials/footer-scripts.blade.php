@@ -112,5 +112,58 @@
     $('#editreturn_modal').modal('hide');
 });
 
+$('.edit_subcategory').click(function(){
+		var id=$(this).data('id');
 	
+		if(id){
+      $.ajax({
+					type: "POST",
+
+					url: "{{ route('subcategoryfetch') }}",
+					data: {  "_token": "{{ csrf_token() }}",
+					id: id },
+					success: function (res) {
+					console.log(res);
+          var obj=JSON.parse(res)
+          //$('#image').val(obj.name);
+		  $('#subcategoryid').val(obj.id);
+          $('#subcategory_name').val(obj.category_name);
+
+         
+					},
+					});	
+		}
+		$('#editsubcategory_modal').modal('show');
+	});
+  
+  $(document).on('click', '.close, .btn-secondary', function () {
+    $('#editsubcategory_modal').modal('hide');
+});
+
+$('.edit_category').click(function(){
+		var id=$(this).data('id');
+	
+		if(id){
+      $.ajax({
+					type: "POST",
+
+					url: "{{ route('categoryfetch') }}",
+					data: {  "_token": "{{ csrf_token() }}",
+					id: id },
+					success: function (res) {
+					console.log(res);
+          var obj=JSON.parse(res)
+		  $('#categoryid').val(obj.id);
+          $('#category_name').val(obj.category_name);
+
+         
+					},
+					});	
+		}
+		$('#editcategory_modal').modal('show');
+	});
+  
+  $(document).on('click', '.close, .btn-secondary', function () {
+    $('#editcategory_modal').modal('hide');
+});
     </script>

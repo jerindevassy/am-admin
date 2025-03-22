@@ -11,6 +11,8 @@ use App\Models\sizes;
 use App\Models\occasians;
 use App\Models\order_items;
 use App\Models\order_masters;
+use App\Models\categories;
+
 use Hash;
 
 class HomeController extends Controller
@@ -176,6 +178,7 @@ class HomeController extends Controller
                 'order_masters.*',
                 'order_items.price',
                 'shipping_address.area',
+                'shipping_address.landmark',
                 'products.product_name'
             )
             ->orderBy('order_masters.id', 'DESC')
@@ -200,4 +203,126 @@ class HomeController extends Controller
 
         return redirect("orders")->with("success", "Edited successfully");
     }
+    public function vieworderitems($orderId)
+    {
+        $order = DB::table('order_masters')
+            ->leftJoin('order_items', 'order_masters.id', '=', 'order_items.order_master_id')
+            ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
+            ->where("order_masters.id", $orderId)
+
+            ->select(
+                'order_masters.*',
+                'order_items.price',
+                'order_items.qty',
+                'order_items.total_amount',
+
+                'products.product_name'
+            )
+            ->get();
+    
+        return view('order.vieworderitems', compact('order'));
+    }
+    
+    public function subcategory($catId, $categoryname)
+    {
+       
+        $markk = DB::table("categories")
+        ->where("cat_id", $catId)
+        ->orderBy("categories.id", "desc")
+        ->get();
+        
+
+        return view("subcategory",compact('markk', "catId", "categoryname"));
+    }
+    public function subcategoryinsert(Request $request)
+    {
+        $mark = new categories();
+        $mark->category_name = $request->subcategory_name;
+        $mark->cat_id = $request->input("catid");
+        if ($files = $request->file("subcategoryimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("img/", $name);
+
+            $mark->category_image = $name;
+            $mark->save();}
+            return back()->with(
+                "success",
+                "Subcategory inserted successfully."
+            );
+    }
+    public function subcategoryfetch(Request $request)
+    {
+        $id = $request->id;
+        $app = categories::find($id);
+        print_r(json_encode($app));
+    }
+
+    public function subcategoryedit(Request $request)
+    {
+        $id = $request->id;
+        $markk = categories::find($id);
+        $markk->category_name = $request->subcategory_name;
+
+        if ($files = $request->file("subcategoryimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("img/", $name);
+            $markk->category_image = $name;
+
+        }
+        $markk->save();
+
+        return back()->with(
+            "success",
+            "Subcategory Edited successfully."
+        );    }
+    public function category()
+    {
+        $mark = DB::table("categories")
+        ->where("cat_id",0)
+        ->orderby('categories.id','DESC')->get();
+
+        return view("category",compact('mark'));
+    }
+    public function categoryinsert(Request $request)
+    {
+        $mark = new categories();
+        $mark->cat_id = 0;
+
+        $mark->category_name = $request->category_name;
+        if ($files = $request->file("categoryimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("img/", $name);
+
+            $mark->category_image = $name;
+            $mark->save();}
+            return redirect("category")->with(
+                "success",
+                "category inserted successfully."
+            );
+    }
+    public function categoryfetch(Request $request)
+    {
+        $id = $request->id;
+        $app = categories::find($id);
+        print_r(json_encode($app));
+    }
+
+    public function categoryedit(Request $request)
+    {
+        $id = $request->id;
+        $markk = categories::find($id);
+        $markk->category_name = $request->category_name;
+
+        if ($files = $request->file("categoryimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("img/", $name);
+            $markk->category_image = $name;
+
+        }
+        $markk->save();
+
+        return redirect("category")->with(
+            "success",
+            "category edited successfully."
+        );    }
 }

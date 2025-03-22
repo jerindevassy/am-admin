@@ -23,9 +23,10 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h5>Customers List</h5>
+                <h5>Order Items List</h5>
               
               </div>
+
               <div class="card-body">
                 <div class="dt-responsive table-responsive">
                   <table id="simpletable" class="table table-striped table-bordered nowrap">
@@ -33,38 +34,51 @@
                       <tr>
                       <th>Id</th>
 
-                        <th>Customer Name</th>
-                        <th>Phone Number</th>
-                        <th>User Name</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+           
+            <th>Price</th>
+            <th>Tax Amount</th>
+           
+            <th>Total Amount</th>
+           
+        </tr>
                      
                       </tr>
                     </thead>
-                       
-                     @php
+                    <tbody>
+                    @php
                      $i = 1;
                      @endphp
-
-                      @foreach($customer as $key)
+                      @foreach($order as $key)
                       <tr>
                       <td>{{$i}}</td>
 
-                        <td>{{$key->customer_name}}</td>
-                        <td>{{$key->phone_number}}</td>
-                        <td>{{$key->name}}</td>
+                        <td>{{$key->product_name}}</td>
+                        <td>{{$key->qty}}</td>
+                        <td>{{$key->price}}</td>
+                        <td>{{$key->tax}}</td>
+
+                        <td>{{$key->total_amount}}</td>
                         
+
                       </tr>
                       @php
        $i++;
        @endphp
        @endforeach
-                
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Id</th>
-                      <th>Customer Name</th>
-                        <th>Phone Number</th>
-                        <th>User Name</th>
+                      <th>Id</th>
+
+                      <th>Product Name</th>
+            <th>Quantity</th>
+           
+            <th>Price</th>
+            <th>Tax Amount</th>
+           
+            <th>Total Amount</th>
                       </tr>
                     </tfoot>
                   </table>
