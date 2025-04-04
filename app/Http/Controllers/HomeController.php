@@ -12,6 +12,7 @@ use App\Models\occasians;
 use App\Models\order_items;
 use App\Models\order_masters;
 use Hash;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -169,13 +170,13 @@ class HomeController extends Controller
     public function orders()
     {
         $order = DB::table('order_masters')
-            ->leftJoin('shipping_address', 'order_masters.address_id', '=', 'shipping_address.id')
+            ->leftJoin('shipping_addresses', 'order_masters.address_id', '=', 'shipping_addresses.id')
             ->leftJoin('order_items', 'order_masters.order_id', '=', 'order_items.id')
             ->leftJoin('products', 'order_items.product_id', '=', 'products.id')
             ->select(
                 'order_masters.*',
                 'order_items.price',
-                'shipping_address.area',
+                'shipping_addresses.area',
                 'products.product_name'
             )
             ->orderBy('order_masters.id', 'DESC')
@@ -199,5 +200,9 @@ class HomeController extends Controller
         $status ->save();
 
         return redirect("orders")->with("success", "Edited successfully");
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('index');
     }
 }
