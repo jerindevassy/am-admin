@@ -1,0 +1,1021 @@
+@font-face {
+    font-family: 'GilroyExtraBold';
+    src: url('/fonts/Gilroy-ExtraBold.otf') format('opentype');
+    font-weight: bold; /* You can adjust this if needed */
+    font-style: normal;  /* You can adjust this if needed */
+  }
+  
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'GilroyExtraBold', sans-serif;
+}
+/* navigationbarstyle Start*/
+.nav-root-wrapper-frame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-frame-4 {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-logo {
+    width: 7rem;
+    height: auto;
+}
+
+.nav-frame-3 {
+    display: flex;
+    gap: 2vw;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.nav-item {
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: black;
+    transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+.nav-frame-2 {
+    display: flex;
+    gap: 2vw;
+    align-items: center;
+}
+
+.nav-icon {
+    width: 1.5rem;
+    height: auto;
+}
+
+.nav-hamburger {
+    display: none;
+    cursor: pointer;
+    width: 25px;
+    height: 18px;
+    position: relative;
+    z-index: 2000;
+}
+
+.nav-hamburger span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: black;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-hamburger span:nth-child(1) { top: 0; }
+.nav-hamburger span:nth-child(2) { top: 8px; }
+.nav-hamburger span:nth-child(3) { top: 16px; }
+
+.nav-hamburger.active span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 8px;
+}
+
+.nav-hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 8px;
+}
+
+.nav-mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transform: translateY(-100%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 1500;
+}
+
+.nav-mobile-menu.active {
+    transform: translateY(0);
+}
+
+.nav-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+/* navigationbarstyle End */
+
+/* headersection Start */
+.hederban-root-wrapper {
+    position: relative;
+    top: 3rem;
+    max-width: 2400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hederban-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.hederban-small-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.hederban-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.hederban-card-large {
+    aspect-ratio: 648/650;
+}
+
+.hederban-card-small {
+    aspect-ratio: 316/350;
+}
+
+.hederban-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.hederban-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.hederban-card:hover .hederban-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hederban-card:hover .hederban-card-image {
+    transform: scale(1.05);
+}
+
+.hederban-card-content {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+}
+
+.hederban-category-line {
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.hederban-category-title {
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: Gilroy, sans-serif;
+}
+/* headersection Ends */
+
+/* Product  Carousel Start */
+.carousel-container {
+    top: 5rem;
+    max-width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.bestsellers {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.view-all {
+    font-size: clamp(16px, 3vw, 18px);
+    color: #333;
+    text-decoration: none;
+    position: relative;
+}
+
+.view-all:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #333;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.view-all:hover:after {
+    transform: scaleX(1);
+}
+
+.carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin: 0 -10px;
+    padding: 0 10px;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: clamp(10px, 2vw, 20px);
+}
+
+.carousel-item {
+    flex: 0 0 calc(100% / 4 - 15px);
+    min-width: 220px;
+    opacity: 0.7;
+    transform: scale(0.95);
+    transition: all 0.5s ease;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-image:hover {
+    transform: translateY(-5px);
+}
+
+.product-info {
+    margin-top: 16px;
+    padding: 0 5px;
+}
+
+.product-title {
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-price {
+    font-size: clamp(12px, 1.8vw, 14px);
+    color: #666;
+}
+
+/* Updated carousel controls styling */
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    padding: 0 10px;
+    z-index: 10;
+}
+
+.carousel-button {
+    width: clamp(40px, 6vw, 44px);
+    height: clamp(40px, 6vw, 44px);
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+.carousel-button:hover {
+    background: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.carousel-button svg {
+    width: clamp(20px, 3vw, 24px);
+    height: clamp(20px, 3vw, 24px);
+    fill: none;
+    stroke: #333;
+    stroke-width: 2;
+}
+.carousel.transitioning {
+    transition: none;
+}
+/* Product  Carousel End */
+/* bottam banner Start  */
+
+.bottambanner-root-wrapper {
+    top: 8rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 155px 100px;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.6), 
+      rgba(0, 0, 0, 0.6)
+    ), url('bgimage1.png');
+  }
+  
+  .bottambanner-frame {
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .bottambanner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 32px 24px;
+    width: 100%;
+  }
+  
+  .bottambanner-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .bottambanner-main-title {
+    color: white;
+    font-size: clamp(32px, 6vw, 48px);
+    font-family: Gilroy, sans-serif;
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: uppercase;
+    max-width: 100%;
+  }
+  
+  .bottambanner-subtitle {
+    color: white;
+    font-size: clamp(16px, 3vw, 20px);
+    font-family: Gilroy, sans-serif;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  
+  .bottambanner-cta-button {
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+    padding: 4px 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .bottambanner-cta-button:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+  
+  .bottambanner-cta-text {
+    color: white;
+    font-size: 14px;
+    font-family: Gilroy, sans-serif;
+    font-weight: 500;
+    line-height: 40px;
+  }
+  
+  .bottambanner-services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 1312px;
+    margin-top: 48px;
+  }
+  
+  .bottambanner-service-card {
+    flex: 1;
+    min-width: 200px;
+    max-width: calc(20% - 16px);
+    background-color: white;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    transition: transform 0.3s ease;
+  }
+  
+  .bottambanner-service-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .bottambanner-service-icon-container {
+    width: 50px;
+    height: 50px;
+    position: relative;
+  }
+  
+  .bottambanner-service-icon-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .bottambanner-service-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .bottambanner-service-title {
+    color: black;
+    font-size: 20px;
+    font-family: Gilroy, sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  
+  .bottambanner-service-description {
+    color: black;
+    font-size: 14px;
+    font-family: Gilroy, sans-serif;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+/* bottam banner Start  */
+/* Polisysection Start */
+.polisy-container {
+    max-width: 2200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    top: 10rem;
+    
+}
+
+.polisy-header-title {
+    font-size: 32px;
+    font-weight: medium;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.polisy-product-images {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.polisy-product-images img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.polisy-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.polisy-feature {
+    text-align: center;
+    flex: 1 1 200px;
+    max-width: 300px;
+}
+
+.polisy-feature img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.polisy-feature-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.polisy-feature-description {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Polisysection End */
+/* footer section Start */
+.landing-container {
+    display: flex;
+    height: 100vh;
+    top: 15rem;
+    position: relative;
+}
+
+.footer-left-section {
+    position: relative;
+    width: 50%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.footer-left-section-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+background-position: center;
+    background-image: linear-gradient(
+rgba(0, 0, 0, 0.6), 
+rgba(0, 0, 0, 0.6)
+), url('max-ducourneau-6uv43p1ePrk-unsplash.jpg');
+}
+
+.footer-left-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.footer-left-section-text {
+    position: absolute;
+    bottom: 40%;
+    left: 10%;
+    color: white;
+    max-width: 70%;
+    z-index: 2;
+}
+
+.footer-left-section-text h1 {
+    font-family: 'Aboreto', sans-serif;
+font-size: 2.5rem;
+text-transform: uppercase;
+line-height: 1.5;
+z-index: 10;
+position: relative;
+color: white;
+text-align: center;
+}
+
+.footer-right-section {
+    width: 50%;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-signup {
+    margin-bottom: 30px;
+}
+
+.footer-signup h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.footer-email-input {
+    display: flex;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.footer-email-input input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+
+.footer-email-input button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.footer-privacy {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.footer-privacy input {
+    margin-right: 10px;
+    
+}
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    
+}
+
+
+.footer-quick-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.footer-quick-links-section {
+    flex: 1;
+}
+
+.footer-quick-links-section h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.footer-quick-links-section ul {
+    list-style: none;
+}
+
+.footer-quick-links-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-social-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-social-links h3 {
+    text-transform: uppercase;
+    margin-right: 1rem;
+}
+
+.footer-copyright {
+    margin-top: auto;
+    padding: 1rem 0;
+    position: relative;
+    bottom: -3rem;
+}
+/* footer section Ends */
+
+@media (max-width: 1312px){
+    /* headersection Start  */
+    .hederban-root-wrapper{
+        max-width: 1312px;
+    }
+    /* <!-- headersection End --> */
+/* Polisysection Start */
+.polisy-container {
+    max-width: 1200px;
+    
+}
+/* Polisysection End */
+
+}
+@media (max-width: 1200px) {
+    /* Product  Carousel Start */
+
+    .carousel-item {
+        flex: 0 0 calc(100% / 3 - 15px);
+    }
+    /* Product  Carousel End */
+
+    /* bottam banner Start  */
+
+    .bottambanner-root-wrapper {
+        padding: 100px 50px;
+      }
+      
+      .bottambanner-service-card {
+        max-width: calc(33.333% - 16px);
+      }
+    /* bottam banner End  */
+
+}
+@media (max-width: 1024px) {
+    /* headersection Start */
+
+    .hederban-small-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* headersection End */
+    /* Polisysection Start */
+    .polisy-product-images {
+        grid-template-columns: repeat(3, 1fr);
+    }
+/* Polisysection End */
+
+
+}
+
+
+@media (max-width: 950px) {
+    /* navigationbarstyle Starts */
+    .nav-logo {
+    width: 6rem;
+    }
+    .nav-item {
+        font-size: .7rem;
+    }
+    .nav-icon {
+        width: 1.2rem;
+    }
+     /* navigationbarstyle End */
+     /* Product  Carousel Start */
+     .carousel-item {
+        flex: 0 0 calc(100% / 2 - 15px);
+    }
+    /* Product  Carousel End */
+
+
+}
+@media (max-width: 768px) {
+     /* navigationbarstyle Starts */
+    .nav-frame-3 {
+        display: none;
+    }
+    
+    .nav-hamburger {
+        display: block;
+        width: 20px;
+        height: 15px;
+    }
+
+    .nav-frame-2 {
+        gap: 4vw;
+    }
+     /* navigationbarstyle End*/
+
+     /* headersection Start */
+     .hederban-grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .hederban-small-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hederban-card-content {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+    }
+    /* headersection End */
+     /* Product  Carousel Start */
+     .carousel-item {
+        flex: 0 0 220px; /* Reduced from 260px */
+    }
+    
+    .product-image {
+        height: 280px; /* Reduced from 320px */
+    }
+    
+    .bestsellers {
+        font-size: 22px; /* Reduced from 24px */
+    }
+
+    .view-all {
+        font-size: 16px; /* Reduced from 18px */
+    }
+
+   
+
+    .carousel-button {
+        width: 36px; /* Reduced from 44px */
+        height: 36px; /* Reduced from 44px */
+    }
+
+    .carousel-button svg {
+        width: 20px; /* Reduced from 24px */
+        height: 20px; /* Reduced from 24px */
+    }
+     /* Product  Carousel End */
+/* bottam banner Start  */
+
+.bottambanner-root-wrapper {
+    padding: 80px 20px;
+  }
+  
+  .bottambanner-service-card {
+    max-width: calc(50% - 16px);
+  }
+  
+  .bottambanner-main-title {
+    font-size: clamp(24px, 5vw, 32px);
+  }
+  
+  .bottambanner-subtitle {
+    font-size: clamp(14px, 3vw, 16px);
+  }
+/* bottam banner End  */
+/* Polisysection Start */
+.polisy-header-title {
+    font-size: 28px;
+}
+.polisy-feature {
+    flex: 1 1 150px;
+}
+/* Polisysection End */
+/* footer section Start */
+
+.landing-container {
+    flex-direction: column;
+}
+
+.footer-left-section, 
+.footer-right-section {
+    width: 100%;
+    height: auto;
+}
+
+.footer-left-section-text {
+    position: static;
+    color: black;
+    padding: 2rem;
+    text-align: center;
+}
+
+.footer-quick-links {
+    flex-direction: column;
+}
+
+.footer-quick-links-section {
+    margin-bottom: 1rem;
+}
+/* footer section Ends */
+
+
+}
+@media (max-width: 600px) {
+     /* Product  Carousel Start */
+
+    .carousel-item {
+        flex: 0 0 calc(100% - 30px);
+    }
+
+    .carousel-container {
+        padding: 0 10px;
+    }
+    
+    .carousel-button {
+        width: 36px;
+        height: 36px;
+    }
+     /* Product  Carousel End */
+     /* Polisysection Start */
+     .polisy-product-images {
+        grid-template-columns: repeat(2, 1fr);
+    }
+/* Polisysection End */
+
+
+}
+
+@media (max-width: 480px) {
+    /* headersection Start */
+
+    .hederban-small-grid {
+        grid-template-columns: 1fr;
+    }
+    /* headersection End */
+    /* Product  Carousel Start */
+    .carousel-item {
+        flex: 0 0 180px; /* Reduced from 220px */
+    }
+    
+    .product-image {
+        height: 240px; /* Reduced from 280px */
+    }
+    
+    .bestsellers {
+        font-size: 15px; /* Reduced from 22px */
+    }
+
+    .view-all {
+        font-size: 10px; /* Reduced from 16px */
+    }
+
+
+
+    .carousel-button {
+        width: 32px; /* Reduced from 36px */
+        height: 32px; /* Reduced from 36px */
+    }
+
+    .carousel-button svg {
+        width: 18px; /* Reduced from 20px */
+        height: 18px; /* Reduced from 20px */
+    }
+     /* Product  Carousel End */
+/* bottam banner Start  */
+.bottambanner-service-card {
+    max-width: 100%;
+  }
+  
+  .bottambanner-content {
+    padding: 24px 16px;
+  }
+/* bottam banner End  */
+/* Polisysection Start */
+.polisy-header-title {
+    font-size: 24px;
+}
+
+.polisy-feature {
+    flex: 1 1 100%;
+}
+
+.polisy-feature-title {
+    font-size: 18px;
+}
+
+.polisy-feature-description {
+    font-size: 14px;
+}
+/* Polisysection End */
+
+}

@@ -13,15 +13,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+
+//web links
+Route::get('/index', [App\Http\Controllers\WebController::class, 'index'])->name('index');
+Route::get('/productlist/{id}', [App\Http\Controllers\WebController::class, 'productlist'])->name('productlist');
+Route::get('/productdetails/{id}', [App\Http\Controllers\WebController::class, 'productdetails'])->name('productdetails');
+Route::get('/userLogin', [App\Http\Controllers\WebController::class, 'userLogin'])->name('userLogin');
+Route::get('/userRegister', [App\Http\Controllers\WebController::class, 'userRegister'])->name('userRegister');
+Route::post('/createUser', [App\Http\Controllers\WebController::class, 'createUser'])->name('createUser');
+Route::get('/check-auth', [App\Http\Controllers\WebController::class, 'checkauth'])->name('check-auth');
+Route::post('/add-to-bag', [App\Http\Controllers\CustomerController::class, 'addtobag'])->name('add-to-bag');
+Route::post('/minusToBag', [App\Http\Controllers\CustomerController::class, 'minusToBag'])->name('minusToBag');
+
+Route::post('/ulogin', [App\Http\Controllers\WebController::class, 'ulogin'])->name('ulogin');
+Route::post('/add-to-wishlist', [App\Http\Controllers\CustomerController::class, 'addtowishlist'])->name('add-to-wishlist');
+Route::get('/cartlist', [App\Http\Controllers\CustomerController::class, 'cartlist'])->name('cartlist');
+Route::post('/remove-cart', [App\Http\Controllers\CustomerController::class, 'removecart'])->name('remove-cart');
+Route::get('/checkout', [App\Http\Controllers\CustomerController::class, 'checkout'])->name('checkout');
+Route::post('/order-now', [App\Http\Controllers\CustomerController::class, 'ordernow'])->name('order-now');
+Route::post('/updateAd', [App\Http\Controllers\CustomerController::class, 'updateShippingAddress'])->name('updateAd');
+Route::post('/removeAd', [App\Http\Controllers\CustomerController::class, 'removeShippingAddress'])->name('removeAd');
+Route::get('/profile', [App\Http\Controllers\CustomerController::class, 'profile'])->name('profile');
+Route::post('/addDelivery', [App\Http\Controllers\CustomerController::class, 'addDelivery'])->name('addDelivery');
+Route::post('/removewishlist', [App\Http\Controllers\CustomerController::class, 'removewishlist'])->name('removewishlist');
+Route::post('/move-to-bag', [App\Http\Controllers\CustomerController::class, 'movetobag'])->name('move-to-bag');
+Route::get('/payment-success', [App\Http\Controllers\CustomerController::class, 'paymentsuccess'])->name('payment-success');
+
+
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
 
 Route::get('/agent', [App\Http\Controllers\HomeController::class, 'agent'])->name('agent');
 Route::get('/agentlist', [App\Http\Controllers\HomeController::class, 'agentlist'])->name('agentlist');
