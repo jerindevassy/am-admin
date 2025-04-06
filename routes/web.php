@@ -63,3 +63,11 @@ Route::post('/categoryinsert', [App\Http\Controllers\HomeController::class, 'cat
 Route::post('/categoryfetch', [App\Http\Controllers\HomeController::class, 'categoryfetch'])->name('categoryfetch');
 
 Route::post('/categoryedit', [App\Http\Controllers\HomeController::class, 'categoryedit'])->name('categoryedit');
+
+// Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
+
+// Route::post('/productinsert', [App\Http\Controllers\HomeController::class, 'productinsert'])->name('productinsert');
+// Route::post('/productfetch', [App\Http\Controllers\HomeController::class, 'productfetch'])->name('productfetch');
+
+// Route::post('/productedit', [App\Http\Controllers\HomeController::class, 'productedit'])->name('productedit');
+// Route::post('/fetchsubcategory', [App\Http\Controllers\HomeController::class, 'fetchsubcategory'])->name('fetchsubcategory');

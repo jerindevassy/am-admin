@@ -166,4 +166,7 @@ $('.edit_category').click(function(){
   $(document).on('click', '.close, .btn-secondary', function () {
     $('#editcategory_modal').modal('hide');
 });
+
+
+
     </script>

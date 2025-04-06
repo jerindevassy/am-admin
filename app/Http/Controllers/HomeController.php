@@ -12,6 +12,9 @@ use App\Models\occasians;
 use App\Models\order_items;
 use App\Models\order_masters;
 use App\Models\categories;
+use App\Models\products;
+use App\Models\product_images;
+
 
 use Hash;
 
@@ -325,4 +328,67 @@ class HomeController extends Controller
             "success",
             "category edited successfully."
         );    }
+
+        // public function product()
+        // {
+        //     $markk = DB::table("occasians")
+        //     ->get();
+        //     $mark = DB::table("categories")
+        //     ->where("cat_id", 0)
+        //     ->get();
+    
+        //     return view("product",compact('mark','markk'));
+        // }
+        // public function fetchsubcategory(Request $request)
+        // {
+        //     $categoryId = $request->categoryId;
+        //     $categorys = DB::table("categories")
+        //         ->where("cat_id", $categoryId)
+        //         ->select("id", "category_name")
+        //         ->get();
+        //     return response()->json($categorys);
+        // }
+
+        
+        // public function productinsert(Request $request)
+        // {
+        //     $brandprod = new Products();
+        //     $brandprod->product_name = $request->product_name;
+        //     $brandprod->product_code = $request->product_code;
+        //     $brandprod->product_desc = $request->description;
+        //     $brandprod->cat_id = $request->subcategory;
+        //     $brandprod->occasions = implode(',', $request->occasions ?? []);
+        
+            // Handling thumbnail
+            // if ($request->hasFile('thumbnail')) {
+            //     $file = $request->file('thumbnail');
+            //     $name = time() . '_' . $file->getClientOriginalName();
+            //     $file->move(public_path('images/products/'), $name);
+            //     $brandprod->thumbnail = $name;
+            // }
+        
+            // $brandprod->save();
+            // $product_id = $brandprod->id;
+        
+            // Validate multiple images
+            // $request->validate([
+            //     'product_image.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // ]);
+        
+            // Insert multiple images to product_images table
+        //     if ($request->hasFile('product_image')) {
+        //         foreach ($request->file('product_image') as $image) {
+        //             $image_name = time() . '_' . $image->getClientOriginalName();
+        //             $image->move(public_path('images/products/'), $image_name);
+        
+        //             Product_images::create([
+        //                 'product_id' => $product_id,
+        //                 'product_image' => $image_name,
+        //             ]);
+        //         }
+        //     }
+        
+        //     return redirect('product')->with('success', 'Product added successfully.');
+        // }
+        
 }
