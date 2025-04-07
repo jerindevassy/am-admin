@@ -17,6 +17,7 @@
       </div> -->
 
 <section class="hederban-root-wrapper">
+<<<<<<< HEAD
 <div class="image-container-home">
             <img src="{{asset('web/css/bgimage1.jpg')}}" alt="Image Description">
               <div class="overlay">
@@ -27,6 +28,10 @@
               </div>
           </div>
         <!-- <div class="hederban-grid-container">
+=======
+        <div class="hederban-grid-container">
+           
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
             <div class="hederban-card hederban-card-large">
                 <img src="{{asset('web/assets/jasmin-chew-UBeNYvk6ED0-unsplash.jpg')}}" alt="Earrings" class="hederban-card-image">
                 <div class="hederban-overlay">
@@ -45,7 +50,11 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </div> -->
+=======
+        </div>
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 
         <div class="hederban-small-grid">
             <div class="hederban-card hederban-card-small">
@@ -255,6 +264,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <style>
       /* Container that holds the image and overlay */
 .image-container-home {
@@ -319,4 +329,6 @@
         }
 }
     </style>
+=======
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
     @endsection

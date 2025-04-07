@@ -23,7 +23,10 @@
     width: 100%;
     top: 0;
     z-index: 1000;
+<<<<<<< HEAD
     gap:15px;
+=======
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 }
 
 .nav-frame-4 {
@@ -41,9 +44,14 @@
     display: flex;
     gap: 2vw;
     align-items: center;
+<<<<<<< HEAD
     justify-content: initial;
     flex: 1;
     margin-left: 25px;
+=======
+    justify-content: center;
+    flex: 1;
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 }
 
 .nav-item {
@@ -744,7 +752,10 @@ text-align: center;
 }
 /* footer section Ends */
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 @media (max-width: 1312px){
     /* headersection Start  */
     .hederban-root-wrapper{
@@ -777,6 +788,7 @@ text-align: center;
         max-width: calc(33.333% - 16px);
       }
     /* bottam banner End  */
+<<<<<<< HEAD
     
     .image-container-home .content h2 {
         font-size: 48px;
@@ -786,6 +798,9 @@ text-align: center;
         text-transform: uppercase;
         
         }
+=======
+
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 }
 @media (max-width: 1024px) {
     /* headersection Start */

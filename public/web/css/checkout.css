@@ -1,5 +1,9 @@
 body {
+<<<<<<< HEAD
   font-family: Gilroy;
+=======
+  font-family: sans-serif;
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
   margin: 0;
   padding: 0;
 }
@@ -12,7 +16,10 @@ body {
   font-family: Gilroy;
   padding: 20px 7%;
   margin-top: 6%;
+<<<<<<< HEAD
 align-items: start;
+=======
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 }
 
 .section {
@@ -46,7 +53,11 @@ align-items: start;
   line-height: 17.15px;
 }
 
+<<<<<<< HEAD
 .left-section .user-info {
+=======
+.user-info {
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -181,7 +192,10 @@ align-items: start;
 .bottom-section-payment-section {
   grid-column: 2;
   grid-row: 2;
+<<<<<<< HEAD
 align-items: start;
+=======
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 }
 .price-row {
   display: flex;

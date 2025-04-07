@@ -5,6 +5,10 @@
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('web/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('web/css/plp.css')}}" />
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" href="{{asset('web/css/cart.css')}}" />
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
     
     @stack('styles') 
     @stack('login')

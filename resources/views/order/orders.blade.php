@@ -92,14 +92,10 @@
  <table id="example1" class="table table-bordered table-striped">
   <thead>
 <tr>
-                     <th>id</th>
                     <th>Order Id</th>
-                    <th>Product Name</th>
 
                     <th>Address</th>
-                     <th>Total Amount</th>
-                    <th>Tax</th>
-                    <th>Shipping Charge</th>
+                     
                     <th>Final Amount</th>
                     <th>Payment Mode</th>
                      <th>Payment Status</th>
@@ -116,15 +112,11 @@
    
                      @foreach($order as $key)
    <tr>
-       <td>{{ $i }}</td>
       
-       <td>{{$key->price}}</td>
-       <td>{{$key->product_name}}</td>
+       <td>{{$key->order_id}}</td>
 
-       <td>{{$key->area}}</td>
-       <td>{{$key->total_amount	}}</td>
-       <td>{{$key->tax}}</td>
-       <td>{{$key->shipping_charge}}</td>
+       <td>{{$key->landmark}} ,{{$key->area}}</td>
+       
        <td>{{$key->final_amount	}}</td>
        <td>      @if($key->payment_mode==0) Cash on Delivery @else Online @endif
        </td>
@@ -145,7 +137,12 @@
                    
                     @else
                     @endif
-                </td>   
+                </td> 
+                <td style="width: 50px;">
+
+         <a href="{{ route('vieworderitems', ['orderId' => $key->id ])}}" class="btn btn-primary btn-sm order_trans">View Items</a>
+
+</td>
                 <td> 
     <button class="btn btn-primary edit_return" data-toggle="modal" data-id="{{ $key->id }}"
             style="background: linear-gradient(45deg, #28a745, #28a745); color: #fff;">
@@ -163,14 +160,10 @@
                   <tfoot>
 
                   <tr>
-                  <th>id</th>
                     <th>Order Id</th>
-                    <th>Product Name</th>
 
                     <th>Address</th>
-                     <th>Total Amount</th>
-                    <th>Tax</th>
-                    <th>Shipping Charge</th>
+                    
                     <th>Final Amount</th>
                     <th>Payment Mode</th>
                      <th>Payment Status</th>

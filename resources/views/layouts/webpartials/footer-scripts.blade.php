@@ -2,6 +2,10 @@
 <script src="{{asset('web/js/pdlist.js')}}"></script>
 <script src="{{asset('web/js/pdetail.js')}}"></script>
 <script src="{{asset('web/js/checkout.js')}}"></script>
+<<<<<<< HEAD
+=======
+<script src="{{asset('web/js/cart.js')}}"></script>
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).on('click', '.add-to-bag', function () {
@@ -33,6 +37,40 @@
     });
 });
 
+<<<<<<< HEAD
+=======
+
+$(document).on('click', '.movetocart', function () {
+    var id = $(this).data('id');
+    var wid = $(this).data('value');
+
+    $.ajax({
+       
+        url: "{{ route('check-auth') }}",
+				
+        method: 'GET',
+       	
+        success: function (response) {
+
+          console.log(response);
+         
+            if (response.authenticated) {
+                // User is logged in, proceed to add the item
+                moveToBag(id,wid);
+            } else {
+                // Redirect to login if not authenticated
+               
+                window.location.href = "{{ url('userLogin') }}";
+
+            }
+        },
+        error: function () {
+            alert('Error checking authentication.');
+        }
+    });
+});
+
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 $(document).on("click", ".incrementqty", function () {
     var id = $(this).data("id"); // Product ID
     var i = $(this).data("value"); // Index or unique identifier
@@ -114,6 +152,10 @@ function addToBag(id) {
         success: function (response) {
             // alert(response.message);
             $('#cart-count').html(response.cart_count);
+<<<<<<< HEAD
+=======
+           
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
         },
         error: function () {
             alert('Failed to add item.');
@@ -121,6 +163,29 @@ function addToBag(id) {
     });
 }
 
+<<<<<<< HEAD
+=======
+function moveToBag(id,wid){
+    $.ajax({
+       
+       type: "POST",
+
+                  url: "{{ route('move-to-bag') }}",
+                  data: {  "_token": "{{ csrf_token() }}",
+                  id: id , wid :wid },
+      success: function (response) {
+          // alert(response.message);
+          $('#cart-count').html(response.cart_count);
+          $('#wishlist-count').html(response.wishlist_count);
+          $('#wishlist_item_'+wid).hide();
+      },
+      error: function () {
+          alert('Failed to add item.');
+      }
+  });
+}
+
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 function minusToBag(id){
   $.ajax({
        
@@ -211,6 +276,31 @@ $(document).on('click','.action-btn-remove',function(){
       }
   });
 });
+<<<<<<< HEAD
+=======
+$(document).on('click','.remove-wishlist',function(){
+  var id=$(this).data('id');
+ 
+  $.ajax({
+       
+       type: "POST",
+
+        url: "{{ route('removewishlist') }}",
+        data: {  "_token": "{{ csrf_token() }}",
+        id: id },
+      success: function (response) {
+          // alert(response.message);
+          $('#wishlist_item_'+id).hide();
+          $('#wishlist-count').html(response.count);
+        //   location.reload();
+      },
+      error: function () {
+          alert('Failed to add item.');
+      }
+  });
+});
+
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 $(document).on('click','.updateDelivery',function(){
   var id=$(this).data('id');
 
@@ -251,4 +341,46 @@ $(document).on('click','.removeDelivery',function(){
 });
 
 
+<<<<<<< HEAD
 </script>
+=======
+</script>
+
+<!-- modal popup................ -->
+<script>// Get modal and buttons
+    const modal = docum<script>
+    // Select modal elements
+    const modal = document.querySelector(".modal");
+    const closeBtn = document.querySelector(".close-btn");
+    const customizeOptions = document.querySelectorAll(".custom-options .option");
+
+    // Function to open the modal
+    function openModal() {
+        if (modal) modal.style.display = "flex";
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        if (modal) modal.style.display = "none";
+    }
+
+    // Add event listeners to open modal when clicking an option
+    if (customizeOptions.length > 0) {
+        customizeOptions.forEach(option => {
+            option.addEventListener("click", openModal);
+        });
+    }
+
+    // Close modal when clicking the close button
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeModal);
+    }
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener("click", function (event) {
+        if (modal && event.target === modal) {
+            closeModal();
+        }
+    });
+</script>
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150

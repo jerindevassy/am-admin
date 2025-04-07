@@ -1,8 +1,15 @@
 body {
+<<<<<<< HEAD
     font-family: Gilroy, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
+=======
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 }
 
 /* Dashboard Layout */
@@ -11,6 +18,10 @@ body {
     max-width: 87%;
     margin: 20px auto;
     background: white;
+<<<<<<< HEAD
+=======
+    border-radius: 10px;
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     margin-top: 7%;
@@ -34,10 +45,16 @@ body {
     gap: 16px;
 }
 
+<<<<<<< HEAD
 .sidebar .user-info {
     display: flex;
     flex-direction: column;
     padding: 0;
+=======
+.user-info {
+    display: flex;
+    flex-direction: column;
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 }
 
 .user-info h2 {
@@ -179,6 +196,7 @@ body {
 
 }
 
+<<<<<<< HEAD
 
 
 /* Responsive Design */
@@ -189,6 +207,9 @@ body {
    	 width: 17%;
 	}
 }
+=======
+/* Responsive Design */
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 @media (max-width: 768px) {
     .profile-container {
         flex-direction: column;

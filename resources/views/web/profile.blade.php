@@ -68,7 +68,11 @@
                     <div class="menu-left">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </div>
+<<<<<<< HEAD
                     <span class="arrow">➜</span>
+=======
+                    <a href="{{url('logout')}}"><span class="arrow">➜</span></a>
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
                 </a>
             </nav>
         </div>
@@ -135,17 +139,29 @@
     </div>
    
 
+<<<<<<< HEAD
     
 
     <div class="form-container " style="margin-left:20px;">
                 <label>District</label>
                 <select>
+=======
+    <form action="{{ route('addDelivery') }}" method="POST">
+    @csrf
+
+    <div class="form-container " style="margin-left:20px;">
+        
+ 
+                <label>District</label>
+                <select name="district">
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
                     @foreach($district as $keyDis)
                     <option value="{{$keyDis->id}}">{{$keyDis->district}}</option>
                     @endforeach
                 </select>
                 
                 <label>Area</label>
+<<<<<<< HEAD
                 <input type="text" value="{{$shipping_Address->phone_number}}" disabled>
 
                 <label>landmark</label>
@@ -162,6 +178,25 @@
             </div>
 
     
+=======
+                <input type="text" name="area" required>
+
+                <label>landmark</label>
+                <input type="text" name="landmark" required>
+
+                <label>Zipcode</label>
+                <input type="text" name="zipcode" required>
+
+                <label>Phone Number</label>
+                <input type="number" name="phonenumber" required>
+
+
+                <button class="save-btn" type="submit">SAVE</button>
+               
+            </div>
+            </form>
+
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 </div>
 
 </div>

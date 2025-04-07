@@ -3,7 +3,11 @@
 @section('content')
 
 @push('cart')
+<<<<<<< HEAD
 <link rel="stylesheet" href="{{asset('web/css/cart.css')}}" />
+=======
+
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 <link rel="stylesheet" href="{{asset('web/css/checkout.css')}}" />
 @endpush
 <div class="container">
@@ -17,7 +21,11 @@
                     <!-- <button class="change-button" onclick="openModal()">CHANGE</button> -->
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="modal" id="addressModal">  
+=======
+            <div class="modal" id="wishlistModal">  
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
    
       <div class="modal-header">
         <h2>CHANGE DELIVERY ADDRESS</h2>
@@ -97,7 +105,10 @@
         @endphp
         @endforeach
     </div>
+<<<<<<< HEAD
         <div>
+=======
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
         <div class="right-section price-details">
             <div class="section-title price">PRICE DETAILS</div>
             <div class="price-row">
@@ -121,6 +132,7 @@
                 <div>₹{{$sum}}</div>
             </div>
             <div class="save-message">You will save ₹{{$msum-$sum}} on this order</div>
+<<<<<<< HEAD
         </div>   
             <div class="bottom-section-payment-section">
             <a href="{{url('checkout')}}"><button class="pay-now-button">CHECKOUT <i class='fab fa-cc-amazon-pay'></i></button></a>
@@ -128,6 +140,14 @@
            </div>
         </div>
        
+=======
+           
+        </div>
+        <div class="bottom-section-payment-section">
+        <a href="{{url('checkout')}}"><button class="pay-now-button">CHECKOUT <i class='fab fa-cc-amazon-pay'></i></button></a>
+            <div class="secure-payments"><i class='fas fa-handshake'></i>Secure payments, guaranteed authenticity and hassle-free returns </div>
+        </div>
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
     </div>
      <!-- /* wish list pop up */ -->
     <div class="modal" id="wishlistModal">

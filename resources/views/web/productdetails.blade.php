@@ -130,6 +130,60 @@
                     @endforeach
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+
+            <div class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div class="modeltop">
+                    <p class="price-title">ESTIMATED PRICE</p>
+                    <p class="mrp"><span>MRP:</span> <s>₹50,000</s></p>
+                    <p class="estore-price">eStore Price: <strong>₹45,000</strong></p>
+                </div>
+                <!-- Metal Selection -->
+                <div class="mainsection">
+                    <div class="section">
+                        <p class="section-title">METAL</p>
+                        <div class="options">
+                            <div class="option selected">24 KT Rose <br> Gold <br> <span>IN STOCK</span></div>
+                            <div class="option">24 KT Yellow <br> Gold <br> <span>IN STOCK</span></div>
+                            <div class="option">18 KT Gold <br> <span>IN STOCK</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Diamond Selection -->
+                    <div class="section">
+                        <div class="diamond-section">
+                            <span class="section-title">DIAMOND </span>
+                            <span class="guide">DIAMOND GUIDE</span>
+                        </div>
+                        <div class="options mid">
+                            <div class="option selected">IJ-SI <br> <span>IN STOCK</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Size Selection -->
+                    <div class="section">
+                        <div class="diamond-section">
+                            <span class="section-title">SIZE </span>
+                            <span class="guide">SIZE GUIDE</span>
+                        </div>
+                        <div class="options bottom">
+                            <div class="option">6 <br> 45.6mm <br> <span>IN STOCK</span></div>
+                            <div class="option">7 <br> 45.6mm <br> <span>IN STOCK</span></div>
+                            <div class="option">8 <br> 45.6mm <br> <span>IN STOCK</span></div>
+                            <div class="option">8 <br> 45.6mm <br> <span>IN STOCK</span></div>
+                            <div class="option selected">9 <br> 44.7mm <br> <span>IN STOCK</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Button -->
+                    <button class="confirm-btn">CONFIRM CUSTOMISATION</button>
+                </div>
+            </div>
+        </div>
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
         </div>
       
     </div>

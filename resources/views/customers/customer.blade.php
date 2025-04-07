@@ -31,24 +31,37 @@
                   <table id="simpletable" class="table table-striped table-bordered nowrap">
                     <thead>
                       <tr>
+                      <th>Id</th>
+
                         <th>Customer Name</th>
                         <th>Phone Number</th>
                         <th>User Name</th>
                      
                       </tr>
                     </thead>
-                    <tbody>
+                       
+                     @php
+                     $i = 1;
+                     @endphp
+
                       @foreach($customer as $key)
                       <tr>
+                      <td>{{$i}}</td>
+
                         <td>{{$key->customer_name}}</td>
                         <td>{{$key->phone_number}}</td>
                         <td>{{$key->name}}</td>
                         
                       </tr>
-                     @endforeach
+                      @php
+       $i++;
+       @endphp
+       @endforeach
+                
                     </tbody>
                     <tfoot>
                       <tr>
+                        <th>Id</th>
                       <th>Customer Name</th>
                         <th>Phone Number</th>
                         <th>User Name</th>

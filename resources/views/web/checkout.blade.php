@@ -4,7 +4,15 @@
 <link rel="stylesheet" href="{{asset('web/css/cart.css')}}" />
 <link rel="stylesheet" href="{{asset('web/css/checkout.css')}}" /> 
 @endpush
+<<<<<<< HEAD
 <div class="container">
+=======
+<form action="{{ route('order-now') }}" method="POST">
+    @csrf
+<div class="container">
+
+
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
     <div class="left-section">
         <div class="section">
             <div class="section-title"><i class="fa-solid fa-user"></i> PROFILE</div>
@@ -81,6 +89,10 @@
         <div class="total-amount price-row">
             <div>Total Amount</div>
             <div>₹{{$sum}}</div>
+<<<<<<< HEAD
+=======
+            <input type="hidden" name="total_amount" value="{{$sum}}">
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
         </div>
         <div class="save-message">You will save ₹{{$msum-$sum}} on this order</div>
 
@@ -133,5 +145,9 @@
 
 
 </div>
+<<<<<<< HEAD
 
+=======
+</form>
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 @endsection

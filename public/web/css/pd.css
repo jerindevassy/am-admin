@@ -75,9 +75,12 @@ img.main-image {
     font-weight: 500;
     font-size: 24px;
     margin-bottom: 22px;
+<<<<<<< HEAD
 overflow-wrap: break-word;
     white-space: normal;
     max-width: 100%;
+=======
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 }
 
 .mrp {

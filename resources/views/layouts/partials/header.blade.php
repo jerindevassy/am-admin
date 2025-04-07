@@ -39,8 +39,20 @@
           </a>
         </li>
         <li class="pc-item">
-          <a href="{{url('orders')}}" class="pc-link">
+          <a href="{{url('category')}}" class="pc-link">
             <span class="pc-micon"><i class="nav-icon fas fa-user"></i></span>
+            <span class="pc-mtext">Category</span>
+          </a>
+        </li>
+        <!-- <li class="pc-item">
+          <a href="{{url('product')}}" class="pc-link">
+            <span class="pc-micon"><i class="nav-icon fas fa-user"></i></span>
+            <span class="pc-mtext">Products</span>
+          </a>
+        </li> -->
+        <li class="pc-item">
+          <a href="{{url('orders')}}" class="pc-link">
+            <span class="pc-micon"><i class="nav-icon fas fa-briefcase"></i></span>
             <span class="pc-mtext">Orders</span>
           </a>
         </li>

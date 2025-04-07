@@ -246,9 +246,12 @@ body {
 i.fas.fa-handshake {
   padding: 5px;
 }
+<<<<<<< HEAD
 i.fab.fa-cc-amazon-pay {
   padding-left: 5px;
 }
+=======
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
 @media (max-width: 1024px) {
   .price-details {
     padding: 10px;
@@ -286,8 +289,13 @@ i.fab.fa-cc-amazon-pay {
   position: fixed;
   top: 5px;
   right: 13px;
+<<<<<<< HEAD
   /* width: 543px; */
   width: auto;
+=======
+  width: 543px;
+  /* width: auto; */
+>>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
