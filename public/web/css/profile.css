@@ -1,0 +1,214 @@
+body {
+    font-family: Gilroy, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+/* Dashboard Layout */
+.profile-container {
+    display: flex;
+    max-width: 87%;
+    margin: 20px auto;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 7%;
+    gap: 15px;
+}
+
+.profile-container .sidebar {
+    width: 100%;
+    max-width: 32%;
+    background: #F7F7F5;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+/* Profile Section */
+.profile-container .user-profile {
+    display: flex;
+    align-items: revert;
+    justify-content: unset;
+    padding: 10px;
+    gap: 16px;
+}
+
+.sidebar .user-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.user-info h2 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.user-info p {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0 0;
+    font-weight: 400;
+}
+
+.user-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    padding: 5px;
+}
+
+.profile-container .user-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    padding: 5px;
+}
+.profile-container .user-profile h2 {
+    font-size: 18px;
+    margin: 10px 0 5px;
+    font-weight: 600;
+}
+
+.profile-container .user-profile p {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+}
+
+/* Sidebar Menu */
+.profile-container .menu {
+    display: flex;
+    flex-direction: column;
+}
+.profile-container .menu-item {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    padding: 25px 0;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+.profile-container .menu-item i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+.profile-container .arrow {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Main Content */
+.profile-container .main-content {
+    width: 100%;
+    background: #F7F7F5;
+    padding: 30px;
+}
+
+.profile-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0;
+    font-family: 'Gilroy', sans-serif;
+
+}
+.profile-container .header h3 {
+    font-size: 16px;
+    font-family: Gilroy;
+    font-weight: 500;
+    font-size: 16px;
+
+}
+.profile-container .edit-link {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+/* Form Styles */
+.profile-container .form-container {
+    display: flex;
+    flex-direction: column;
+}
+.profile-container label {
+
+    margin: 14px 0;
+    color: #555;
+    font-family: Gilroy;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+}
+.profile-container input {
+    padding: 20px;
+    font-size: 14px;
+    border: 1px solid #8D8D8D;
+    margin-bottom: 10px;
+    width: 343px;
+}
+
+.profile-container select {
+    padding: 20px;
+    font-size: 14px;
+    border: 1px solid #8D8D8D;
+    margin-bottom: 10px;
+    width: 343px;
+}
+
+
+.profile-container .save-btn {
+    width: 11%;
+    background: #8D8D8D;
+    color: white;
+    font-size: 16px;
+    padding: 17px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: 'Gilroy', sans-serif;
+
+
+}
+
+
+
+/* Responsive Design */
+
+
+@media (max-width: 1200px){
+.profile-container .save-btn {
+   	 width: 17%;
+	}
+}
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .profile-container .sidebar {
+        max-width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+    .main-content {
+        width: 100%;
+        padding: 20px;
+    }
+    .profile-container input {
+        width: 100%;
+    }
+}

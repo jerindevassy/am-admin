@@ -1,0 +1,404 @@
+/* General Styles */
+
+@font-face {
+  font-family: "GilroyExtraBold";
+  src: url("../../css/Gilroy-ExtraBold.otf") format("opentype");
+  font-weight: bold; /* You can adjust this if needed */
+  font-style: normal; /* You can adjust this if needed */
+}
+
+.wrapper-productlist {
+  margin: 10% 4% 5% 4%;
+}
+
+.wrappertop {
+  display: flex;
+
+  margin-left: 10px;
+  gap: 16px;
+}
+
+.text-section {
+  flex: 0.9;
+}
+.text-section p {
+  font-family: Gilroy;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 22.4px;
+  letter-spacing: 2%;
+}
+.text-section h2 {
+  font-family: Gilroy;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: 5%;
+  margin-bottom: 20px;
+}
+
+.image-grid {
+  display: flex;
+  gap: 16px;
+}
+.image-wrapper {
+  position: relative;
+  width: 227px;
+
+  height: 300px;
+}
+.image-grid img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.image-overlay {
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  bottom: 21px;
+  z-index: 1;
+  left: 20px;
+  position: absolute;
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 2%;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 26%;
+  padding: 21px;
+}
+.sidebar h2 {
+  font-family: Gilroy;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.6px;
+}
+.sidebar-section h3 {
+  font-family: Gilroy;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.6px;
+}
+.filter-content input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: black; /* Sets the tick color */
+  border: 2px solid #1c1b1f; /* Sets the border color */
+  cursor: pointer;
+  margin: 15px;
+}
+
+.sidebar-section {
+  padding: 10px 0;
+}
+
+/* Hide Filter Content by Default */
+.filter-content {
+  display: none;
+  padding: 10px 0;
+}
+
+/* Show Filters when Active */
+.sidebar-section.active .filter-content {
+  display: block;
+}
+
+/* Toggle Button */
+.toggle-btn {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 200;
+  color: #1c1b1f;
+  width: 14px;
+  height: 14px;
+  float: right;
+}
+
+.close-btn {
+  display: block;
+  cursor: pointer;
+  color: #1e1e1e;
+  margin-bottom: 10px;
+  font-family: Gilroy;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+
+  text-decoration: underline;
+  margin: 26px 0 25px 18px;
+}
+
+/* Products Section */
+.products {
+  width: 90%;
+}
+
+.filters-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 98%; /* Ensures full width */
+  border-top: 1px solid #d9d9d9;
+  margin: 3% 2% 2% 1%;
+  padding-top: 37px;
+}
+.filters-container h2 {
+  font-family: Gilroy;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.6px;
+  letter-spacing: 5%;
+  color: #8d8d8d;
+}
+
+.sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Adds space between elements */
+  border: none;
+}
+
+select {
+  padding: 2px;
+  font-family: Gilroy;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.6px;
+  letter-spacing: 5%;
+  color: #8d8d8d;
+  border-radius: 4px;
+  border: none;
+}
+
+/* Product Grid Layout */
+.product-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  margin: 17px;
+}
+
+/* Product Card */
+.product-card {
+  width: 100%; /* Makes it responsive */
+  max-width: 345px; /* Prevents excessive width */
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.main-image {
+  width: 100%;
+  display: block;
+}
+
+.pd-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.product-card:hover .pd-image-overlay {
+  opacity: 1;
+}
+
+.product-card img {
+  width: 100%; /* Makes the image responsive */
+  max-width: 345px; /* Prevents excessive stretching */
+  height: auto; /* Maintains aspect ratio */
+  object-fit: cover; /* Ensures image fills its box */
+  height: 434px; /* Fixed height */
+}
+
+.product-card h3 {
+  font-family: Gilroy;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19.6px;
+  padding: 8px 0 5px 0;
+}
+
+.product-card .metal {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 5px 0 5px 0;
+  color: #8d8d8d;
+}
+
+.product-card .price {
+  font-family: Gilroy;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 5%;
+  color: black;
+}
+
+.product-card .old-price {
+  font-family: Gilroy;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: #8d8d8d;
+  padding-left: 5px;
+}
+.load-more-container {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #d9d9d9;
+}
+.p-count {
+  font-family: Gilroy;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+  padding: 15px;
+  margin: 0 0 10px 0;
+}
+.load-more {
+  padding: 8px;
+  border: 1px solid black;
+  font-size: 16px;
+  padding: 18px;
+  width: 21%;
+  background-color: #fff;
+}
+/* Style the track */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px; /* Thin line */
+  background: #ccc; /* Light gray track */
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Style the thumb (slider button) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: black; /* Black thumb */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Firefox-specific thumb styling */
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: black; /* Black thumb */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Optional: Hover & Active States */
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #333; /* Slightly lighter black on hover */
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  background: #555; /* Even lighter black when clicked */
+}
+.range-values {
+  display: flex;
+  justify-content: space-between;
+}
+/*  Responsive Design  */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .container {
+    display: block;
+  }
+  .text-section p {
+    margin-bottom: 10px;
+  }
+  .sidebar {
+    width: 60%;
+    padding: 2px;
+  }
+
+  .products {
+    width: 100%;
+  }
+
+  .category-section {
+    justify-content: center;
+  }
+  .product-card img {
+    width: 100%;
+    height: 50vh;
+}
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .category-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapper-productlist {
+    margin: 15% 1% 4% 1%;
+}
+  .image-wrapper {
+    width: auto;
+    height: auto;
+  }
+  .image-grid img {
+    width: 20vw;
+    height: 100%;
+}
+  .image-overlay {
+    font-size: 0.8rem;
+  }
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+  .sidebar {
+    width: 70%;
+    padding: 2px;
+  }
+}
+/* Tablet View */
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  }
+}
+
+/* Mobile View */
+@media (max-width: 520px) {
+  .product-grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 item per row */
+  }
+  .image-overlay {
+    font-size: 0.5rem;
+}
+.image-overlay {
+  left: 11px;
+}
+  }

@@ -12,6 +12,7 @@ use App\Models\occasians;
 use App\Models\order_items;
 use App\Models\order_masters;
 use Hash;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -199,5 +200,9 @@ class HomeController extends Controller
         $status ->save();
 
         return redirect("orders")->with("success", "Edited successfully");
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('index');
     }
 }

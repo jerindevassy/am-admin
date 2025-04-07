@@ -1,0 +1,378 @@
+@font-face {
+    font-family: "GilroyExtraBold";
+    src: url("../../css/Gilroy-ExtraBold.otf") format("opentype");
+    font-weight: bold;
+    /* You can adjust this if needed */
+    font-style: normal;
+    /* You can adjust this if needed */
+}
+
+/* Layout */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 60px;
+    background: white;
+    padding: 66px 20px 20px 20px;
+    gap: 25px
+}
+
+.wrapper_name {
+    width: 100%;
+}
+
+/* Left Section - Product Images */
+.left-section {
+    flex: 1;
+}
+
+img.main-image {
+    width: 100%;
+    /* Makes it responsive */
+    max-width: 720px;
+    /* Prevents it from getting too large */
+    height: auto;
+    /* Maintains aspect ratio */
+    object-fit: cover;
+    height: 820px;
+    /* This is forcing a fixed height */
+}
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 18px;
+    margin-top: 10px;
+
+}
+
+.thumbnail-gallery img {
+    height: auto;
+    cursor: pointer;
+    object-fit: cover;
+    max-height: none;
+    width: 100%;
+    /* max-width: 228px; */
+    max-height: 295px;
+    max-width: 31%;
+}
+
+/* Right Section - Product Details */
+.right-section {
+    flex: 0.95;
+}
+
+.gold-type {
+    font-family: Gilroy;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.product-title {
+    font-family: Gilroy;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 22px;
+overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+}
+
+.mrp {
+    font-family: Gilroy;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: line-through;
+    margin-bottom: 14px;
+}
+
+.mrp span {
+    font-family: Gilroy;
+    font-weight: 600;
+    font-size: 24px;
+    text-decoration: line-through;
+    margin-bottom: 15px;
+
+}
+
+.estore-price {
+    font-family: Gilroy;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.tax-info {
+    font-family: Gilroy;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.ratings {
+    font-size: 14px;
+    color: #8D8D8D;
+    margin: 10px 0;
+}
+
+.star {
+    font-weight: bold;
+    color: #8D8D8D;
+}
+
+.stock-status {
+    font-family: Gilroy;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 5%;
+    color: #3EAF3F;
+
+}
+
+.customize-section p {
+    font-family: Gilroy;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    text-transform: uppercase;
+
+}
+
+.custom-options {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.option {
+    padding: 10px;
+    background: #f2f2f2;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    flex: 1;
+}
+
+.option span {
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+}
+
+.engravings {
+    flex: 2;
+}
+
+i.fa-solid.fa-bag-shopping {
+    padding-right: 10px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+    align-items: center;
+}
+
+.add-to-bag {
+    flex: 2;
+    background: #000000;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.wishlist,
+.share {
+    flex: 0.2;
+    background: white;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: #000000;
+}
+
+.features {
+    display: flex;
+    justify-content: space-between;
+    background: #f2f2f2;
+    margin-top: 20px;
+    border-radius: 5px;
+    padding: 11% 9%;
+}
+
+.feature {
+    text-align: center;
+    font-size: 12px;
+
+}
+
+.feature p {
+    font-family: Gilroy;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+.feature i {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.details-section {
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details-section h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.toggle-icon {
+    font-size: 24px;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.details-content {
+    display: none;
+    /* Initially hidden */
+    padding: 10px 0;
+    font-size: 14px;
+
+}
+
+.expanded .toggle-icon {
+    transform: rotate(180deg);
+    /* Rotate when expanded */
+}
+
+.properties-box {
+    /* background: #f8f8f8; */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.title {
+    width: 22%;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+}
+
+.properties-box p {
+    font: 400;
+    color: black;
+    font-weight: 100;
+    padding: 17px;
+}
+.details {
+    margin-top: 1px;
+}
+.details-section {
+
+    padding: 27px 10px 20px 1px;
+    /* margin-bottom: 5px; */
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+.details-section p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    font-family: Gilroy;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 5%;
+    text-transform: uppercase;
+
+}
+
+.details-content {
+    display: none;
+    /* Hidden by default */
+    padding: 20px;
+    color: black;
+    font-weight: 100;
+
+}
+
+.details-content p {
+    padding: 5px;
+    color: black;
+    font-weight: 100;
+}
+
+.details-content ul {
+    padding: 5px;
+    color: black;
+    font-weight: 100;
+}
+
+.landing-container {
+
+    top: 5rem;
+
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+        margin: 0;
+        padding: 5px;
+    }
+
+    .left-section {
+        padding-right: 0;
+    }
+
+    img.main-image {
+        width: 100%;
+        object-fit: cover;
+        max-width: fit-content;
+        /* Prevents it from getting too large */
+    }
+
+    .right-section {
+        padding: 22px;
+    }
+
+    .thumbnail-gallery {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section {
+        padding-right: 0;
+    }
+}

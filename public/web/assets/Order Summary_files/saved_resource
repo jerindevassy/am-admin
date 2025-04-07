@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
+<meta name="google" value="notranslate">
+
+<script>
+function addRow(name, url, isdir,
+    size, size_string, date_modified, date_modified_string) {
+  if (name == "." || name == "..")
+    return;
+
+  var root = document.location.pathname;
+  if (root.substr(-1) !== "/")
+    root += "/";
+
+  var tbody = document.getElementById("tbody");
+  var row = document.createElement("tr");
+  var file_cell = document.createElement("td");
+  var link = document.createElement("a");
+
+  link.className = isdir ? "icon dir" : "icon file";
+
+  if (isdir) {
+    name = name + "/";
+    url = url + "/";
+    size = 0;
+    size_string = "";
+  } else {
+    link.draggable = "true";
+    link.addEventListener("dragstart", onDragStart, false);
+  }
+  link.innerText = name;
+  link.href = root + url;
+
+  file_cell.dataset.value = name;
+  file_cell.appendChild(link);
+
+  row.appendChild(file_cell);
+  row.appendChild(createCell(size, size_string));
+  row.appendChild(createCell(date_modified, date_modified_string));
+
+  tbody.appendChild(row);
+}
+
+function onDragStart(e) {
+  var el = e.srcElement;
+  var name = el.innerText.replace(":", "");
+  var download_url_data = "application/octet-stream:" + name + ":" + el.href;
+  e.dataTransfer.setData("DownloadURL", download_url_data);
+  e.dataTransfer.effectAllowed = "copy";
+}
+
+function createCell(value, text) {
+  var cell = document.createElement("td");
+  cell.setAttribute("class", "detailsColumn");
+  cell.dataset.value = value;
+  cell.innerText = text;
+  return cell;
+}
+
+function start(location) {
+  var header = document.getElementById("header");
+  header.innerText = header.innerText.replace("LOCATION", location);
+
+  document.getElementById("title").innerText = header.innerText;
+}
+
+function onHasParentDirectory() {
+  var box = document.getElementById("parentDirLinkBox");
+  box.style.display = "block";
+
+  var root = document.location.pathname;
+  if (!root.endsWith("/"))
+    root += "/";
+
+  var link = document.getElementById("parentDirLink");
+  link.href = root + "..";
+}
+
+function sortTable(column) {
+  var theader = document.getElementById("theader");
+  var oldOrder = theader.cells[column].dataset.order || '1';
+  oldOrder = parseInt(oldOrder, 10)
+  var newOrder = 0 - oldOrder;
+  theader.cells[column].dataset.order = newOrder;
+
+  var tbody = document.getElementById("tbody");
+  var rows = tbody.rows;
+  var list = [], i;
+  for (i = 0; i < rows.length; i++) {
+    list.push(rows[i]);
+  }
+
+  list.sort(function(row1, row2) {
+    var a = row1.cells[column].dataset.value;
+    var b = row2.cells[column].dataset.value;
+    if (column) {
+      a = parseInt(a, 10);
+      b = parseInt(b, 10);
+      return a > b ? newOrder : a < b ? oldOrder : 0;
+    }
+
+    // Column 0 is text.
+    if (a > b)
+      return newOrder;
+    if (a < b)
+      return oldOrder;
+    return 0;
+  });
+
+  // Appending an existing child again just moves it.
+  for (i = 0; i < list.length; i++) {
+    tbody.appendChild(list[i]);
+  }
+}
+
+// Add event handlers to column headers.
+function addHandlers(element, column) {
+  element.onclick = (e) => sortTable(column);
+  element.onkeydown = (e) => {
+    if (e.key == 'Enter' || e.key == ' ') {
+      sortTable(column);
+      e.preventDefault();
+    }
+  };
+}
+
+function onLoad() {
+  addHandlers(document.getElementById('nameColumnHeader'), 0);
+  addHandlers(document.getElementById('sizeColumnHeader'), 1);
+  addHandlers(document.getElementById('dateColumnHeader'), 2);
+}
+
+window.addEventListener('DOMContentLoaded', onLoad);
+</script>
+
+<style>
+
+  h1 {
+    border-bottom: 1px solid #c0c0c0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  th {
+    cursor: pointer;
+  }
+
+  td.detailsColumn {
+    padding-inline-start: 2em;
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  a.icon {
+    padding-inline-start: 1.5em;
+    text-decoration: none;
+    user-select: auto;
+  }
+
+  a.icon:hover {
+    text-decoration: underline;
+  }
+
+  a.file {
+    background : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABnRSTlMAAAAAAABupgeRAAABEElEQVR42nRRx3HDMBC846AHZ7sP54BmWAyrsP588qnwlhqw/k4v5ZwWxM1hzmGRgV1cYqrRarXoH2w2m6qqiqKIR6cPtzc3xMSML2Te7XZZlnW7Pe/91/dX47WRBHuA9oyGmRknzGDjab1ePzw8bLfb6WRalmW4ip9FDVpYSWZgOp12Oh3nXJ7nxoJSGEciteP9y+fH52q1euv38WosqA6T2gGOT44vry7BEQtJkMAMMpa6JagAMcUfWYa4hkkzAc7fFlSjwqCoOUYAF5RjHZPVCFBOtSBGfgUDji3c3jpibeEMQhIMh8NwshqyRsBJgvF4jMs/YlVR5KhgNpuBLzk0OcUiR3CMhcPaOzsZiAAA/AjmaB3WZIkAAAAASUVORK5CYII=") left top no-repeat;
+  }
+
+  a.dir {
+    background : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABt0lEQVR42oxStZoWQRCs2cXdHTLcHZ6EjAwnQWIkJyQlRt4Cd3d3d1n5d7q7ju1zv/q+mh6taQsk8fn29kPDRo87SDMQcNAUJgIQkBjdAoRKdXjm2mOH0AqS+PlkP8sfp0h93iu/PDji9s2FzSSJVg5ykZqWgfGRr9rAAAQiDFoB1OfyESZEB7iAI0lHwLREQBcQQKqo8p+gNUCguwCNAAUQAcFOb0NNGjT+BbUC2YsHZpWLhC6/m0chqIoM1LKbQIIBwlTQE1xAo9QDGDPYf6rkTpPc92gCUYVJAZjhyZltJ95f3zuvLYRGWWCUNkDL2333McBh4kaLlxg+aTmyL7c2xTjkN4Bt7oE3DBP/3SRz65R/bkmBRPGzcRNHYuzMjaj+fdnaFoJUEdTSXfaHbe7XNnMPyqryPcmfY+zURaAB7SHk9cXSH4fQ5rojgCAVIuqCNWgRhLYLhJB4k3iZfIPtnQiCpjAzeBIRXMA6emAqoEbQSoDdGxFUrxS1AYcpaNbBgyQBGJEOnYOeENKR/iAd1npusI4C75/c3539+nbUjOgZV5CkAU27df40lH+agUdIuA/EAgDmZnwZlhDc0wAAAABJRU5ErkJggg==") left top no-repeat;
+  }
+
+  a.up {
+    background : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACM0lEQVR42myTA+w1RxRHz+zftmrbdlTbtq04qRGrCmvbDWp9tq3a7tPcub8mj9XZ3eHOGQdJAHw77/LbZuvnWy+c/CIAd+91CMf3bo+bgcBiBAGIZKXb19/zodsAkFT+3px+ssYfyHTQW5tr05dCOf3xN49KaVX9+2zy1dX4XMk+5JflN5MBPL30oVsvnvEyp+18Nt3ZAErQMSFOfelCFvw0HcUloDayljZkX+MmamTAMTe+d+ltZ+1wEaRAX/MAnkJdcujzZyErIiVSzCEvIiq4O83AG7LAkwsfIgAnbncag82jfPPdd9RQyhPkpNJvKJWQBKlYFmQA315n4YPNjwMAZYy0TgAweedLmLzTJSTLIxkWDaVCVfAbbiKjytgmm+EGpMBYW0WwwbZ7lL8anox/UxekaOW544HO0ANAshxuORT/RG5YSrjlwZ3lM955tlQqbtVMlWIhjwzkAVFB8Q9EAAA3AFJ+DR3DO/Pnd3NPi7H117rAzWjpEs8vfIqsGZpaweOfEAAFJKuM0v6kf2iC5pZ9+fmLSZfWBVaKfLLNOXj6lYY0V2lfyVCIsVzmcRV9Y0fx02eTaEwhl2PDrXcjFdYRAohQmS8QEFLCLKGYA0AeEakhCCFDXqxsE0AQACgAQp5w96o0lAXuNASeDKWIvADiHwigfBINpWKtAXJvCEKWgSJNbRvxf4SmrnKDpvZavePu1K/zu/due1X/6Nj90MBd/J2Cic7WjBp/jUdIuA8AUtd65M+PzXIAAAAASUVORK5CYII=") left top no-repeat;
+  }
+
+  html[dir=rtl] a {
+    background-position-x: right;
+  }
+
+  #parentDirLinkBox {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+</style>
+
+<title id="title"></title>
+
+</head>
+
+<body>
+
+<h1 id="header">Index of LOCATION</h1>
+
+<div id="parentDirLinkBox" style="display:none">
+  <a id="parentDirLink" class="icon up">
+    <span id="parentDirText">[parent directory]</span>
+  </a>
+</div>
+
+<table>
+  <thead>
+    <tr class="header" id="theader">
+      <th id="nameColumnHeader" tabindex=0 role="button">Name</th>
+      <th id="sizeColumnHeader" class="detailsColumn" tabindex=0 role="button">
+        Size
+      </th>
+      <th id="dateColumnHeader" class="detailsColumn" tabindex=0 role="button">
+        Date modified
+      </th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+  </tbody>
+</table>
+
+</body>
+
+</html>
+<script>// Copyright 2012 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+"use strict";var loadTimeData;class LoadTimeData{constructor(){this.data_=null}set data(value){expect(!this.data_,"Re-setting data.");this.data_=value}valueExists(id){return id in this.data_}getValue(id){expect(this.data_,"No data. Did you remember to include strings.js?");const value=this.data_[id];expect(typeof value!=="undefined","Could not find value for "+id);return value}getString(id){const value=this.getValue(id);expectIsType(id,value,"string");return value}getStringF(id,var_args){const value=this.getString(id);if(!value){return""}const args=Array.prototype.slice.call(arguments);args[0]=value;return this.substituteString.apply(this,args)}substituteString(label,var_args){const varArgs=arguments;return label.replace(/\$(.|$|\n)/g,(function(m){expect(m.match(/\$[$1-9]/),"Unescaped $ found in localized string.");return m==="$$"?"$":varArgs[m[1]]}))}getBoolean(id){const value=this.getValue(id);expectIsType(id,value,"boolean");return value}getInteger(id){const value=this.getValue(id);expectIsType(id,value,"number");expect(value===Math.floor(value),"Number isn't integer: "+value);return value}overrideValues(replacements){expect(typeof replacements==="object","Replacements must be a dictionary object.");for(const key in replacements){this.data_[key]=replacements[key]}}}function expect(condition,message){if(!condition){throw new Error("Unexpected condition on "+document.location.href+": "+message)}}function expectIsType(id,value,type){expect(typeof value===type,"["+value+"] ("+id+") is not a "+type)}expect(!loadTimeData,"should only include this file once");loadTimeData=new LoadTimeData;window.loadTimeData=loadTimeData;console.warn("crbug/1173575, non-JS module files deprecated.");</script><script>loadTimeData.data = {"header":"Index of LOCATION","headerDateModified":"Date modified","headerName":"Name","headerSize":"Size","language":"en","parentDirText":"[parent directory]","textdirection":"ltr"};</script><script>start("/Users/jerin/projects/new 06/Amokha/Amokha/assets/");</script>
+<script>onHasParentDirectory();</script>
+<script>addRow("images","images",1,320,"320 B",1741266692,"06/03/2025, 18:41:32");</script>
+<script>addRow("alekon-pictures-yj4kwA4h_Ms-unsplash.jpg","alekon-pictures-yj4kwA4h_Ms-unsplash.jpg",0,3675891,"3.5 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("alexis-antoine-r7JZGKGhrf0-unsplash.jpg","alexis-antoine-r7JZGKGhrf0-unsplash.jpg",0,2036156,"1.9 MB",1741238730,"06/03/2025, 10:55:30");</script>
+<script>addRow("alvaro-o-donnell-ptoKHlOZqIM-unsplash.jpg","alvaro-o-donnell-ptoKHlOZqIM-unsplash.jpg",0,2058960,"2.0 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("amokahalogo.png","amokahalogo.png",0,1971,"1.9 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("anna-tarazevich-dju8OGXEKEs-unsplash.jpg","anna-tarazevich-dju8OGXEKEs-unsplash.jpg",0,1859853,"1.8 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("back.png","back.png",0,689,"689 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("baylee-gramling-FOwYSRlL-Bk-unsplash.jpg","baylee-gramling-FOwYSRlL-Bk-unsplash.jpg",0,1756666,"1.7 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("bgimage1.png","bgimage1.png",0,1528025,"1.5 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("brooke-cagle-kElEigko7PU-unsplash.jpg","brooke-cagle-kElEigko7PU-unsplash.jpg",0,448281,"438 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("carticon.png","carticon.png",0,357,"357 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("christian-lucas-LrQys_Ukuak-unsplash.jpg","christian-lucas-LrQys_Ukuak-unsplash.jpg",0,2292250,"2.2 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("chuttersnap-NYqEk7a42yc-unsplash.jpg","chuttersnap-NYqEk7a42yc-unsplash.jpg",0,667106,"651 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("cutomcreation.png","cutomcreation.png",0,710,"710 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("dimitri-photography-jEYYq9AjmTo-unsplash.jpg","dimitri-photography-jEYYq9AjmTo-unsplash.jpg",0,2925352,"2.8 MB",1741238730,"06/03/2025, 10:55:30");</script>
+<script>addRow("dimonts.png","dimonts.png",0,1286,"1.3 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("eric-fung-bTPCbB3kmbw-unsplash.jpg","eric-fung-bTPCbB3kmbw-unsplash.jpg",0,2139288,"2.0 MB",1741238730,"06/03/2025, 10:55:30");</script>
+<script>addRow("fbicon.png","fbicon.png",0,452,"452 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("instagramicon.png","instagramicon.png",0,557,"557 B",1741238730,"06/03/2025, 10:55:30");</script>
+<script>addRow("jasmin-chew-UBeNYvk6ED0-unsplash.jpg","jasmin-chew-UBeNYvk6ED0-unsplash.jpg",0,1695764,"1.6 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("khaled-ghareeb-OI1MEinU9sQ-unsplash.jpg","khaled-ghareeb-OI1MEinU9sQ-unsplash.jpg",0,5988992,"5.7 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("korie-cull-ggtdbP92hf8-unsplash.jpg","korie-cull-ggtdbP92hf8-unsplash.jpg",0,1966364,"1.9 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("likebutton.png","likebutton.png",0,356,"356 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("likeicion.png","likeicion.png",0,483,"483 B",1741238730,"06/03/2025, 10:55:30");</script>
+<script>addRow("lilartsy-ZhmbakzCBtk-unsplash.jpg","lilartsy-ZhmbakzCBtk-unsplash.jpg",0,2571276,"2.5 MB",1741238730,"06/03/2025, 10:55:30");</script>
+<script>addRow("max-ducourneau-6uv43p1ePrk-unsplash.jpg","max-ducourneau-6uv43p1ePrk-unsplash.jpg",0,5214110,"5.0 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("old.png","old.png",0,995,"995 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("pdpimage.jpeg","pdpimage.jpeg",0,61317,"59.9 kB",1742310817,"18/03/2025, 20:43:37");</script>
+<script>addRow("product1.png","product1.png",0,18904,"18.5 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("product2.png","product2.png",0,20122,"19.7 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("product3.png","product3.png",0,22672,"22.1 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("product4.png","product4.png",0,13256,"12.9 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("product5.png","product5.png",0,936,"936 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("profileicon.png","profileicon.png",0,448,"448 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("qulityicon.png","qulityicon.png",0,1182,"1.2 kB",1741238730,"06/03/2025, 10:55:30");</script>
+<script>addRow("returnicon.png","returnicon.png",0,922,"922 B",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("sama-hosseini-U_hLxGtAN6U-unsplash.jpg","sama-hosseini-U_hLxGtAN6U-unsplash.jpg",0,3052092,"2.9 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("sama-hosseini-uesvB32vC6U-unsplash.jpg","sama-hosseini-uesvB32vC6U-unsplash.jpg",0,1837025,"1.8 MB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("shipingicon.png","shipingicon.png",0,1107,"1.1 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("warantyicon'.png","warantyicon'.png",0,1129,"1.1 kB",1741238732,"06/03/2025, 10:55:32");</script>
+<script>addRow("Xicon.png","Xicon.png",0,512,"512 B",1741238730,"06/03/2025, 10:55:30");</script>
