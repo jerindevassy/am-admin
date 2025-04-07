@@ -18,7 +18,7 @@ use App\Models\product_images;
 
 use Hash;
 use Auth;
-use Auth;
+
 
 class HomeController extends Controller
 {

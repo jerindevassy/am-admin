@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //web links
+//web links
 Route::get('/index', [App\Http\Controllers\WebController::class, 'index'])->name('index');
 Route::get('/productlist/{id}', [App\Http\Controllers\WebController::class, 'productlist'])->name('productlist');
 Route::get('/productdetails/{id}', [App\Http\Controllers\WebController::class, 'productdetails'])->name('productdetails');
@@ -33,10 +34,16 @@ Route::post('/add-to-wishlist', [App\Http\Controllers\CustomerController::class,
 Route::get('/cartlist', [App\Http\Controllers\CustomerController::class, 'cartlist'])->name('cartlist');
 Route::post('/remove-cart', [App\Http\Controllers\CustomerController::class, 'removecart'])->name('remove-cart');
 Route::get('/checkout', [App\Http\Controllers\CustomerController::class, 'checkout'])->name('checkout');
-Route::get('/order-now', [App\Http\Controllers\CustomerController::class, 'ordernow'])->name('order-now');
+Route::post('/order-now', [App\Http\Controllers\CustomerController::class, 'ordernow'])->name('order-now');
 Route::post('/updateAd', [App\Http\Controllers\CustomerController::class, 'updateShippingAddress'])->name('updateAd');
 Route::post('/removeAd', [App\Http\Controllers\CustomerController::class, 'removeShippingAddress'])->name('removeAd');
 Route::get('/profile', [App\Http\Controllers\CustomerController::class, 'profile'])->name('profile');
+Route::post('/addDelivery', [App\Http\Controllers\CustomerController::class, 'addDelivery'])->name('addDelivery');
+Route::post('/removewishlist', [App\Http\Controllers\CustomerController::class, 'removewishlist'])->name('removewishlist');
+Route::post('/move-to-bag', [App\Http\Controllers\CustomerController::class, 'movetobag'])->name('move-to-bag');
+Route::get('/payment-success', [App\Http\Controllers\CustomerController::class, 'paymentsuccess'])->name('payment-success');
+
+
 
 
 

@@ -1,11 +1,7 @@
 <nav class="nav-root-wrapper-frame">
         <div class="nav-frame-4">
             <a href="{{url('index')}}">
-<<<<<<< HEAD
             <img src="{{asset('web/assets/amokahalogo.png')}}" alt="Logo" class="nav-logo"></a>
-=======
-            <img src="{{asset('web/assets/logo-original.png')}}" alt="Logo" class="nav-logo"></a>
->>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
             <div class="nav-frame-3">
               @foreach($categories as $cat)
               <a href="{{ url('productlist', $cat->id) }}" class="nav-item">{{ $cat->category_name }}</a>
@@ -15,13 +11,8 @@
             </div>
         </div>
         @auth
-<<<<<<< HEAD
         <div class="nav-frame-2">
                 <div class="wishlist-container" style="position: relative; display: inline-block;">
-=======
-        <div class="nav-frame-2" >
-                <div class="wishlist-container" style="position: relative; display: inline-block;" onclick="openModal()">
->>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
             <img src="{{ asset('web/assets/likeicion.png') }}" alt="Like" class="nav-icon" width="30">
            
     @php 
@@ -31,37 +22,6 @@
             <span id="wishlist-count" class="wishlist-badge">{{$wcount}}</span>
            
         </div> 
-<<<<<<< HEAD
-=======
-
-        <div class="modal" id="wishlistModal">
-      <div class="modal-header">
-          <h2>WISHLIST</h2>
-          <button class="close-button" onclick="closeModal()">&times;</button>
-      </div>
-     
-      @foreach($wishlist as $wlist)
-      <div class="wishlist-item" id="wishlist_item_{{$wlist->id}}">
-      
-          <div class="item-content">
-              <img src="{{asset('web/assets/images/products/'.$wlist->thumbnail)}}" alt="Product Image">
-              <div class="item-details">
-                  <h3>24KT SOLID GOLD</h3>
-                  <p>{{$wlist->product_name}}</p>
-                  <span class="item-price">MRP: ₹{{$wlist->mrp}}</span>
-                  <span class="item-e-price">eStore Price: ₹{{$wlist->selling_rate}}</span>
-              </div>
-          </div>
-
-          <div class="wishlist-actions">
-              <button class="movetocart " data-id="{{$wlist->variant_id}}" data-value="{{$wlist->id}}">ADD TO CART</button>
-              <button class="remove remove-wishlist" data-id="{{$wlist->id}}">REMOVE</button>
-          </div>
-      </div>
-      @endforeach
-
-      </div>
->>>>>>> 74d14964f6e5fdaa094f00f20c76701eebd02150
         
     
     @php 
