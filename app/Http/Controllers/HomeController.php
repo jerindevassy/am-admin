@@ -330,6 +330,132 @@ class HomeController extends Controller
             "category edited successfully."
         );    }
 
+        public function productcategory()
+        {
+            $mark = DB::table("categories")
+                ->where("cat_id", 0) // Categories only
+                ->get();
+        
+            // Get only Product Categories (i.e., entries that have a subcategory as parent)
+            $market = DB::table("categories as product_cat")
+                ->join("categories as sub_cat", "product_cat.cat_id", "=", "sub_cat.id")
+                ->join("categories as cat", "sub_cat.cat_id", "=", "cat.id")
+                ->select(
+                    "product_cat.id",
+                    "product_cat.category_name as product_category_name",
+                    "product_cat.category_image",
+                    "sub_cat.category_name as subcategory_name",
+                    "cat.category_name as category_name"
+                )
+                ->orderBy("product_cat.id", "desc")
+                ->get();
+        
+            return view("productcategory", compact('mark', 'market'));
+        }
+        
+        public function fetchsubcategory(Request $request)
+        {
+            $categoryId = $request->categoryId;
+            $categorys = DB::table("categories")
+                ->where("cat_id", $categoryId)
+                ->select("id", "category_name")
+                ->get();
+            return response()->json($categorys);
+        }
+        public function productcategoryinsert(Request $request)
+       {
+        $request->validate([
+                 'subcategory' => 'required|numeric|min:1',
+                 'productcategory_name' => 'required|string|max:255',
+                 'productcategoryimage' => 'required|image',
+              ]);
+        $mark = new categories();
+        $mark->category_name = $request->productcategory_name;
+        $mark->cat_id = $request->subcategory;
+        if ($files = $request->file("productcategoryimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("images/categories/", $name);
+
+            $mark->category_image = $name;
+            $mark->save();}
+            return back()->with(
+                "success",
+                "Product Category inserted successfully."
+            );
+        }
+    
+        public function getmarketsubcatlist(Request $request)
+        {
+            $subcatlist = DB::table("categories")
+                ->where("cat_id", $request->cid)
+                ->get();
+    
+            if ($subcatlist) {
+                $namelist = "";
+                foreach ($subcatlist as $key => $single) {
+                    $namelist .=
+                        '<option value="' .
+                        $single->id .
+                        '">' .
+                        $single->category_name .
+                        "</option>";
+                }
+            }
+            return Response($namelist);
+        }
+        public function productcategoryfetch(Request $request)
+        {
+            $product = DB::table("categories")
+                ->where("id", $request->id)
+                ->first();
+        
+            if (!$product) {
+                return response()->json(['error' => 'Product category not found.'], 404);
+            }
+        
+            $subcategory = DB::table("categories")
+                ->where("id", $product->cat_id)
+                ->first();
+        
+            $maincat = $subcategory ? DB::table("categories")->where("id", $subcategory->cat_id)->first() : null;
+        
+            return response()->json([
+                'id' => $product->id,
+                'productcategoryname' => $product->category_name,
+                'category_id' => $maincat ? $maincat->id : null,
+                'subcategory_id' => $subcategory ? $subcategory->id : null,
+                'image' => $product->category_image,
+            ]);
+        }
+        public function productcategoryupdate(Request $request)
+        {
+            $request->validate([
+                'id' => 'required|exists:categories,id',
+                'category' => 'required|exists:categories,id',
+                'subcategory' => 'required|exists:categories,id',
+                'productcategoryname' => 'required|string|max:255',
+                'productcategoryimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+        
+            $updateData = [
+                'cat_id' => $request->subcategory,
+                'category_name' => $request->productcategoryname,
+            ];
+        
+            if ($request->hasFile('productcategoryimage')) {
+                $file = $request->file('productcategoryimage');
+                $name = time() . '_' . $file->getClientOriginalName(); 
+                $file->move(public_path('images/categories'), $name);
+                $updateData['category_image'] = $name;
+            }
+        
+            DB::table('categories')->where('id', $request->id)->update($updateData);
+        
+            return redirect()->back()->with('success', 'Product category updated successfully!');
+        }
+        
+
+        
         // public function product()
         // {
         //     $markk = DB::table("occasians")
@@ -340,16 +466,7 @@ class HomeController extends Controller
     
         //     return view("product",compact('mark','markk'));
         // }
-        // public function fetchsubcategory(Request $request)
-        // {
-        //     $categoryId = $request->categoryId;
-        //     $categorys = DB::table("categories")
-        //         ->where("cat_id", $categoryId)
-        //         ->select("id", "category_name")
-        //         ->get();
-        //     return response()->json($categorys);
-        // }
-
+ 
         
         // public function productinsert(Request $request)
         // {

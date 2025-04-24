@@ -168,5 +168,86 @@ $('.edit_category').click(function(){
 });
 
 
+$('.subcategoryadd').on('change', function () {
+    var categoryId = $(this).val();
+
+    if (categoryId) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "{{ route('fetchsubcategory') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                categoryId: categoryId
+            },
+            success: function (res) {
+                console.log(res);
+                $('#subcategory').empty();
+				
+                var html_each = "<option value='0'>Select subcategory</option>";
+                $.each(res, function (key, value) {
+                    html_each += '<option value=' + value.id + '>' + value.category_name + '</option>';
+                });
+                $('#subcategory').append(html_each);
+				
+            },
+        });
+     }
+ });
+
+$(document).ready(function () {
+
+    $('.edit_productcategory').click(function () {
+        let id = $(this).data('id');
+
+        $.ajax({
+            type: "POST",
+            url: "{{ route('productcategoryfetch') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: id
+            },
+            success: function (res) {
+              
+                $('#marketproid').val(res.id);
+                $('#productcategoryname').val(res.productcategoryname);
+                $('#category_name').val(res.category_id).trigger('change');
+                 const subcategoryInterval = setInterval(function () {
+                    if ($('#subcategory_name option').length > 1) {
+                        $('#subcategory_name').val(res.subcategory_id);
+                        clearInterval(subcategoryInterval);
+                    }
+                }, 100);
+
+               
+                $('#editproductcategory_modal').modal('show');
+            }
+        });
+    });
+
+   
+    $('#category_name').on('change', function () {
+        let categoryId = $(this).val();
+        $('#subcategory_name').html('<option value="">Loading...</option>');
+
+        $.ajax({
+            type: "POST",
+            url: "{{ route('getmarketsubcatlist') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                cid: categoryId
+            },
+            success: function (subcat) {
+                $('#subcategory_name').html('<option value="">Select Subcategory</option>' + subcat);
+            }
+        });
+    });
+
+});
+
+
+$(document).on('click', '.close, .btn-secondary', function () {
+    $('#editproductcategory_modal').modal('hide');
+});
 
     </script>

@@ -31,15 +31,36 @@
                 </li>
 
                 <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Products</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                    <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{url('category')}}">Category</a></li>
-                        <li class="pc-item pc-hasmenu">
-                            <a href="#!" class="pc-link">Products</a>
-
-                        </li>
-                    </ul>
+    <a href="#!" class="pc-link">
+        <span class="pc-micon"><i class="ti ti-menu"></i></span>
+        <span class="pc-mtext">Products</span>
+        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+    </a>
+    <ul class="pc-submenu">
+     
+        <li class="pc-item pc-hasmenu">
+            <a href="#!" class="pc-link">
+                <span class="pc-mtext">Category</span>
+                <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+            </a>
+            <ul class="pc-submenu">
+                <li class="pc-item">
+                    <a class="pc-link" href="{{ url('category') }}">Main Category</a>
                 </li>
+                <li class="pc-item">
+                    <a class="pc-link" href="{{ url('productcategory') }}">Product Category</a>
+                </li>
+            </ul>
+        </li>
+
+    
+        <li class="pc-item">
+            <a class="pc-link" href="{{ url('product') }}">Product Page</a>
+        </li>
+    </ul>
+</li>
+
+
                 <li class="pc-item">
                     <a href="{{url('orders')}}" class="pc-link">
                         <span class="pc-micon"><i class="nav-icon fas fa-briefcase"></i></span>
