@@ -107,3 +107,17 @@ Route::post('/productcategoryinsert', [App\Http\Controllers\HomeController::clas
 Route::post('/productcategoryfetch', [App\Http\Controllers\HomeController::class, 'productcategoryfetch'])->name('productcategoryfetch');
 
 Route::post('/productcategoryupdate', [App\Http\Controllers\HomeController::class, 'productcategoryupdate'])->name('productcategoryupdate');
+
+Route::get('/banner', [App\Http\Controllers\HomeController::class, 'banner'])->name('banner');
+Route::post('/bannerinsert', [App\Http\Controllers\HomeController::class, 'bannerinsert'])->name('bannerinsert');
+
+Route::post('/bannerfetch', [App\Http\Controllers\HomeController::class, 'bannerfetch'])->name('bannerfetch');
+
+Route::post('/banneredit', [App\Http\Controllers\HomeController::class, 'banneredit'])->name('banneredit');
+
+Route::get('/subbanner', [App\Http\Controllers\HomeController::class, 'subbanner'])->name('subbanner');
+Route::post('/subbannerinsert', [App\Http\Controllers\HomeController::class, 'subbannerinsert'])->name('subbannerinsert');
+
+Route::post('/subbannerfetch', [App\Http\Controllers\HomeController::class, 'subbannerfetch'])->name('subbannerfetch');
+
+Route::post('/subbanneredit', [App\Http\Controllers\HomeController::class, 'subbanneredit'])->name('subbanneredit');

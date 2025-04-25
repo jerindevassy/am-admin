@@ -12,8 +12,10 @@ use App\Models\occasians;
 use App\Models\order_items;
 use App\Models\order_masters;
 use App\Models\categories;
+use App\Models\Banner;
 use App\Models\products;
 use App\Models\product_images;
+use App\Models\Subbanner;
 
 
 use Hash;
@@ -333,10 +335,10 @@ class HomeController extends Controller
         public function productcategory()
         {
             $mark = DB::table("categories")
-                ->where("cat_id", 0) // Categories only
+                ->where("cat_id", 0) 
                 ->get();
         
-            // Get only Product Categories (i.e., entries that have a subcategory as parent)
+           
             $market = DB::table("categories as product_cat")
                 ->join("categories as sub_cat", "product_cat.cat_id", "=", "sub_cat.id")
                 ->join("categories as cat", "sub_cat.cat_id", "=", "cat.id")
@@ -454,7 +456,94 @@ class HomeController extends Controller
             return redirect()->back()->with('success', 'Product category updated successfully!');
         }
         
+        public function banner()
+        {
+        $mark = DB::table("banners")
+        ->orderby('banners.id','DESC')->get();
+        return view("banner",compact('mark'));
+        }
+        public function bannerinsert(Request $request)
+        {
+        $mark = new Banner();
+        if ($files = $request->file("bannerimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("images/Banner/", $name);
+            $mark->banner_image = $name;
+        }
+        $mark->save();
+            return redirect("banner")->with(
+                "success",
+                "Banner inserted successfully."
+            );
+          }
+        public function bannerfetch(Request $request)
+       {
+        $id = $request->id;
+        $app = Banner::find($id);
+        print_r(json_encode($app));
+       }
 
+       public function banneredit(Request $request)
+       {
+        $id = $request->id;
+        $markk = Banner::find($id);
+        if ($files = $request->file("bannerimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("images/Banner/", $name);
+            $markk->banner_image = $name;
+
+        }
+        $markk->save();
+
+        return redirect("banner")->with(
+            "success",
+            "Banner edited successfully."
+        );    }
+        public function subbanner()
+        {
+            $mark = DB::table("subbanners")->orderBy('id', 'DESC')->get();
+            $subBannerCount = count($mark); 
+        
+            return view("subbanner", compact('mark', 'subBannerCount'));
+        }
+        
+        public function subbannerinsert(Request $request)
+        {
+        $mark = new Subbanner();
+        if ($files = $request->file("subbannerimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("images/Banner/", $name);
+            $mark->image = $name;
+        }
+        $mark->save();
+            return redirect("subbanner")->with(
+                "success",
+                "Sub-Banner inserted successfully."
+            );
+          }
+        public function subbannerfetch(Request $request)
+       {
+        $id = $request->id;
+        $app = Subbanner::find($id);
+        print_r(json_encode($app));
+       }
+
+       public function subbanneredit(Request $request)
+       {
+        $id = $request->id;
+        $markk = Subbanner::find($id);
+        if ($files = $request->file("subbannerimage")) {
+            $name = $files->getClientOriginalName();
+            $files->move("images/Banner/", $name);
+            $markk->image = $name;
+
+        }
+        $markk->save();
+
+        return redirect("subbanner")->with(
+            "success",
+            "Sub-Banner edited successfully."
+        );    }
         
         // public function product()
         // {

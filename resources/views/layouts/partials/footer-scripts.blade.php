@@ -250,4 +250,53 @@ $(document).on('click', '.close, .btn-secondary', function () {
     $('#editproductcategory_modal').modal('hide');
 });
 
+$('.edit_banner').click(function(){
+		var id=$(this).data('id');
+	
+		if(id){
+      $.ajax({
+					type: "POST",
+
+					url: "{{ route('bannerfetch') }}",
+					data: {  "_token": "{{ csrf_token() }}",
+					id: id },
+					success: function (res) {
+					console.log(res);
+          var obj=JSON.parse(res)
+		  $('#bannerid').val(obj.id);
+         
+					},
+					});	
+		}
+		$('#editbanner_modal').modal('show');
+	});
+  
+  $(document).on('click', '.close, .btn-secondary', function () {
+    $('#editbanner_modal').modal('hide');
+});
+
+$('.edit_subbanner').click(function(){
+		var id=$(this).data('id');
+	
+		if(id){
+      $.ajax({
+					type: "POST",
+
+					url: "{{ route('subbannerfetch') }}",
+					data: {  "_token": "{{ csrf_token() }}",
+					id: id },
+					success: function (res) {
+					console.log(res);
+          var obj=JSON.parse(res)
+		  $('#subbannerid').val(obj.id);
+         
+					},
+					});	
+		}
+		$('#editsubbanner_modal').modal('show');
+	});
+  
+  $(document).on('click', '.close, .btn-secondary', function () {
+    $('#editsubbanner_modal').modal('hide');
+});
     </script>
