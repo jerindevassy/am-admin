@@ -168,9 +168,9 @@ $('.edit_category').click(function(){
 });
 
 
+// First AJAX for Subcategory
 $('.subcategoryadd').on('change', function () {
     var categoryId = $(this).val();
-
     if (categoryId) {
         $.ajax({
             type: "POST",
@@ -183,17 +183,68 @@ $('.subcategoryadd').on('change', function () {
             success: function (res) {
                 console.log(res);
                 $('#subcategory').empty();
-				
-                var html_each = "<option value='0'>Select subcategory</option>";
+                $('#productcategory').empty(); // Clear product category when category changes
+                var html_each = "<option value='0'>Select Subcategory</option>";
                 $.each(res, function (key, value) {
                     html_each += '<option value=' + value.id + '>' + value.category_name + '</option>';
                 });
                 $('#subcategory').append(html_each);
-				
             },
         });
-     }
- });
+    }
+});
+
+// Second AJAX for Product Category
+$('#subcategory').on('change', function () {
+    var subcategoryId = $(this).val();
+    if (subcategoryId) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "{{ route('fetchproductcategory') }}",  
+            data: {
+                "_token": "{{ csrf_token() }}",
+                subcategoryId: subcategoryId
+            },
+            success: function (res) {
+                console.log(res);
+                $('#productcategory').empty();
+                var html_each = "<option value='0'>Select Product Category</option>";
+                $.each(res, function (key, value) {
+                    html_each += '<option value=' + value.id + '>' + value.category_name + '</option>';
+                });
+                $('#productcategory').append(html_each);
+            },
+        });
+    }
+});
+
+// Second AJAX for Product Category
+$('#subcategory_name').on('change', function () {
+    var subcategoryId = $(this).val();
+    if (subcategoryId) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "{{ route('fetchproductcategory') }}",  
+            data: {
+                "_token": "{{ csrf_token() }}",
+                subcategoryId: subcategoryId
+            },
+            success: function (res) {
+                console.log(res);
+                $('#productcategory').empty();
+                $('#productcategory').append('<option value="0">Select Product Category</option>');
+
+                if (res.length > 0) {
+                    $.each(res, function (key, value) {
+                        $('#productcategory').append('<option value="'+value.id+'">'+value.category_name+'</option>');
+                    });
+                }
+            },
+        });
+    }
+});
 
 $(document).ready(function () {
 
@@ -298,5 +349,77 @@ $('.edit_subbanner').click(function(){
   
   $(document).on('click', '.close, .btn-secondary', function () {
     $('#editsubbanner_modal').modal('hide');
+});
+
+$('.edit_product').click(function () {
+    var id = $(this).data('id');
+
+    if (id) {
+        $.ajax({
+            type: "POST",
+            url: "{{ route('productfetch') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: id
+            },
+            success: function (res) {
+                console.log(res);
+
+                $('#productid').val(res.id);
+                $('#product_name').val(res.product_name);
+                $('#product_code').val(res.product_code);
+
+              
+                $('#category_name').val(res.category_id);
+             
+                $('#category_name').trigger('change');
+
+                setTimeout(function() {
+                    $('#subcategory_name').val(res.subcategory_id);
+                    $('#subcategory_name').trigger('change');
+
+                    setTimeout(function() {
+                        $('#productcategory').val(res.product_category_id);
+                    }, 500); 
+                }, 500); 
+            },
+        });
+    }
+    $('#editproduct_modal').modal('show');
+});
+
+
+$(document).on('click', '.close, .btn-secondary', function () {
+    $('#editproduct_modal').modal('hide');
+});
+$('.edit_variant').click(function(){
+		var id=$(this).data('id');
+	
+		if(id){
+      $.ajax({
+					type: "POST",
+
+					url: "{{ route('variantsfetch') }}",
+					data: {  "_token": "{{ csrf_token() }}",
+					id: id },
+					success: function (res) {
+					console.log(res);
+          var obj=JSON.parse(res)
+		  $('#variantid').val(obj.id);
+          $('#mrp').val(obj.mrp);
+          $('#selling_rate').val(obj.selling_rate);
+          $('#size').val(obj.size_id);
+
+          $('#metal').val(obj.metal_id);
+
+		  $('#diamond_type').val(obj.diamond_type_id);
+         
+					},
+					});	 
+		}
+		$('#editvariant_modal').modal('show');
+	});
+  $(document).on('click', '.close, .btn-secondary', function () {
+    $('#editvariant_modal').modal('hide');
 });
     </script>

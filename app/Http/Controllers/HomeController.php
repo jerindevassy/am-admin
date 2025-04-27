@@ -16,7 +16,7 @@ use App\Models\Banner;
 use App\Models\products;
 use App\Models\product_images;
 use App\Models\Subbanner;
-
+use App\Models\product_variant;
 
 use Hash;
 use Auth;
@@ -364,6 +364,13 @@ class HomeController extends Controller
                 ->get();
             return response()->json($categorys);
         }
+        public function fetchProductCategory(Request $request)
+       {
+        $subCategoryId = $request->subcategoryId;
+        $productCategories = DB::table('categories')->where('cat_id', $subCategoryId)->get();
+        return response()->json($productCategories);
+        }
+
         public function productcategoryinsert(Request $request)
        {
         $request->validate([
@@ -545,59 +552,162 @@ class HomeController extends Controller
             "Sub-Banner edited successfully."
         );    }
         
-        // public function product()
-        // {
-        //     $markk = DB::table("occasians")
-        //     ->get();
-        //     $mark = DB::table("categories")
-        //     ->where("cat_id", 0)
-        //     ->get();
+        public function product()
+        {
+            $markk = DB::table("occasians")
+            ->get();
+            $mark = DB::table("categories")
+            ->where("cat_id", 0)
+            ->get();
     
-        //     return view("product",compact('mark','markk'));
-        // }
+            return view("product",compact('mark','markk'));
+        }
  
         
-        // public function productinsert(Request $request)
-        // {
-        //     $brandprod = new Products();
-        //     $brandprod->product_name = $request->product_name;
-        //     $brandprod->product_code = $request->product_code;
-        //     $brandprod->product_desc = $request->description;
-        //     $brandprod->cat_id = $request->subcategory;
-        //     $brandprod->occasions = implode(',', $request->occasions ?? []);
+        public function productinsert(Request $request)
+        {
+          
+            $brandprod = new Products();
+            $brandprod->product_name = $request->product_name;
+            $brandprod->product_code = $request->product_code;
+            $brandprod->product_desc = $request->description;
+            $brandprod->cat_id = $request->productcategory;
+            $brandprod->best_sellers = $request->bestseller ?? 0;
+            $brandprod->occasions = implode(',', $request->occasions ?? []);
         
-            // Handling thumbnail
-            // if ($request->hasFile('thumbnail')) {
-            //     $file = $request->file('thumbnail');
-            //     $name = time() . '_' . $file->getClientOriginalName();
-            //     $file->move(public_path('images/products/'), $name);
-            //     $brandprod->thumbnail = $name;
-            // }
+            if ($request->hasFile('thumbnail')) {
+                $file = $request->file('thumbnail');
+                $name = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images/products/'), $name);
+                $brandprod->thumbnail = $name;
+            }
         
-            // $brandprod->save();
-            // $product_id = $brandprod->id;
+            $brandprod->save(); 
         
-            // Validate multiple images
-            // $request->validate([
-            //     'product_image.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            // ]);
+            if ($request->hasFile('product_image')) {
+                foreach ($request->file('product_image') as $image) {
+                    $imageName = time() . '_' . $image->getClientOriginalName();
+                    $image->move(public_path('images/products/'), $imageName);
+                    DB::table('product_images')->insert([
+                        'product_id' => $brandprod->id,
+                        'product_image' => $imageName,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
         
-            // Insert multiple images to product_images table
-        //     if ($request->hasFile('product_image')) {
-        //         foreach ($request->file('product_image') as $image) {
-        //             $image_name = time() . '_' . $image->getClientOriginalName();
-        //             $image->move(public_path('images/products/'), $image_name);
+            return redirect('product')->with('success', 'Product added successfully.');
+        }
         
-        //             Product_images::create([
-        //                 'product_id' => $product_id,
-        //                 'product_image' => $image_name,
-        //             ]);
-        //         }
-        //     }
+        public function productlist()
+        {
+            $markk = DB::table("categories")
+            ->where("cat_id", 0) 
+            ->get();
+    
+            $mark = DB::table("products")
+            ->leftJoin('categories as pc', 'products.cat_id', '=', 'pc.id')         
+            ->leftJoin('categories as sc', 'pc.cat_id', '=', 'sc.id')                
+            ->leftJoin('categories as c', 'sc.cat_id', '=', 'c.id')                  
+            ->orderBy("products.id", "desc")
+            ->select(
+                'products.*',
+                'pc.category_name as product_category',
+                'sc.category_name as subcategory',
+                'c.category_name as category'
+            )
+            ->get();
+    
+            return view("productlist",compact('mark','markk'));
+        }
+ 
+        public function productfetch(Request $request)
+        {
+            $id = $request->id;
         
-        //     return redirect('product')->with('success', 'Product added successfully.');
-        // }
+            $product = DB::table('products')
+                ->leftJoin('categories as pc', 'products.cat_id', '=', 'pc.id')          
+                ->leftJoin('categories as sc', 'pc.cat_id', '=', 'sc.id')              
+                ->leftJoin('categories as c', 'sc.cat_id', '=', 'c.id')                  
+                ->where('products.id', $id)
+                ->select(
+                    'products.*',
+                    'pc.id as product_category_id',
+                    'pc.category_name as product_category_name',
+                    'sc.id as subcategory_id',
+                    'sc.category_name as subcategory_name',
+                    'c.id as category_id',
+                    'c.category_name as category_name'
+                )
+                ->first();
         
+            return response()->json($product);
+        }   
+        
+        public function productedit(Request $request)
+        {
+         $id = $request->id;
+         $markk = products::find($id);
+         $markk->product_name = $request->product_name;
+         $markk->cat_id = $request->productcategory;
+         $markk->product_code = $request->product_code;
+         if ($files = $request->file("thumbnail")) {
+             $name = $files->getClientOriginalName();
+             $files->move("images/products/", $name);
+             $markk->thumbnail = $name;
+ 
+         }
+         $markk->save();
+ 
+         return redirect("productlist")->with(
+             "success",
+             "Product edited successfully."
+         );    }
+         public function varients($productId, $productname)
+         {
+            
+            $metal = DB::table("metals")
+            ->get();
+            $size= DB::table("sizes")
+            ->get();
+            $diamond= DB::table("diamond_types")
+            ->get();
+             $markk = DB::table("product_variants")
+             ->leftJoin('sizes', 'product_variants.size_id', '=', 'sizes.id')          
+             ->leftJoin('diamond_types', 'product_variants.diamond_type_id', '=', 'diamond_types.id')              
+             ->leftJoin('metals', 'product_variants.metal_id', '=', 'metals.id')    
+             ->where("product_id", $productId)
+             ->orderBy("product_variants.id", "desc")
+             ->select(
+                'product_variants.*',
+                'diamond_types.type',
+                'metals.name',
+                'sizes.size'
+             )
+             ->get();
+            return view("varients",compact("markk", "productId", "productname",'diamond', "metal", "size"));
+         }
+         public function variantsfetch(Request $request)
+         {
+             $id = $request->id;
+             $product =product_variant::find($id);
+             print_r(json_encode($product));
+         }   
+         public function variantsedit(Request $request){
+             $id=$request->id;
+             $product=product_variant::find($id);  
+             $product->mrp = $request->mrp;
+             $product->selling_rate = $request->selling_rate;
+             $product->product_id = $request->productid;
+             $product->metal_id= $request->metal;
+             $product->size_id= $request->size;
+             $product->diamond_type_id = $request->diamond_type;
+             $product->save();
+             return redirect('productlist')->with('success','Product Variants Edited Successfully');
+         } 
+
+    
     public function logout(){
         Auth::logout();
         return redirect('index');

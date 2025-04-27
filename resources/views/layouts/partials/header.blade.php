@@ -59,9 +59,7 @@
         </li>
     </ul>
 </li>
-
-
-                <li class="pc-item">
+            <li class="pc-item">
                     <a href="{{url('orders')}}" class="pc-link">
                         <span class="pc-micon"><i class="nav-icon fas fa-briefcase"></i></span>
                         <span class="pc-mtext">Orders</span>

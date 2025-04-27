@@ -95,12 +95,15 @@ Route::post('/categoryfetch', [App\Http\Controllers\HomeController::class, 'cate
 Route::post('/categoryedit', [App\Http\Controllers\HomeController::class, 'categoryedit'])->name('categoryedit');
 Route::get('/productcategory', [App\Http\Controllers\HomeController::class, 'productcategory'])->name('productcategory');
 
-// Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
+Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
 
-// Route::post('/productinsert', [App\Http\Controllers\HomeController::class, 'productinsert'])->name('productinsert');
-// Route::post('/productfetch', [App\Http\Controllers\HomeController::class, 'productfetch'])->name('productfetch');
+Route::post('/productinsert', [App\Http\Controllers\HomeController::class, 'productinsert'])->name('productinsert');
+Route::post('/productfetch', [App\Http\Controllers\HomeController::class, 'productfetch'])->name('productfetch');
+Route::post('/fetchproductcategory', [App\Http\Controllers\HomeController::class, 'fetchProductCategory'])->name('fetchproductcategory');
 
-// Route::post('/productedit', [App\Http\Controllers\HomeController::class, 'productedit'])->name('productedit');
+Route::post('/productedit', [App\Http\Controllers\HomeController::class, 'productedit'])->name('productedit');
+Route::get('/productlist', [App\Http\Controllers\HomeController::class, 'productlist'])->name('productlist');
+
 Route::post('/fetchsubcategory', [App\Http\Controllers\HomeController::class, 'fetchsubcategory'])->name('fetchsubcategory');
 Route::post('/getmarketsubcatlist', [App\Http\Controllers\HomeController::class, 'getmarketsubcatlist'])->name('getmarketsubcatlist');
 Route::post('/productcategoryinsert', [App\Http\Controllers\HomeController::class, 'productcategoryinsert'])->name('productcategoryinsert');
@@ -121,3 +124,8 @@ Route::post('/subbannerinsert', [App\Http\Controllers\HomeController::class, 'su
 Route::post('/subbannerfetch', [App\Http\Controllers\HomeController::class, 'subbannerfetch'])->name('subbannerfetch');
 
 Route::post('/subbanneredit', [App\Http\Controllers\HomeController::class, 'subbanneredit'])->name('subbanneredit');
+
+Route::get('/varients/{productId}/{productname}', [App\Http\Controllers\HomeController::class, 'varients'])->name('varients');
+Route::post('/variantsfetch', [App\Http\Controllers\HomeController::class, 'variantsrfetch'])->name('variantsfetch');
+
+Route::post('/variantsedit', [App\Http\Controllers\HomeController::class, 'variantsedit'])->name('variantsedit');
