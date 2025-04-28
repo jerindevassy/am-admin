@@ -394,13 +394,15 @@ $(document).on('click', '.close, .btn-secondary', function () {
 });
 $('.edit_variant').click(function(){
 		var id=$(this).data('id');
-	
+	    var productid = $(this).data('productid'); 
+
 		if(id){
       $.ajax({
 					type: "POST",
 
 					url: "{{ route('variantsfetch') }}",
 					data: {  "_token": "{{ csrf_token() }}",
+                        
 					id: id },
 					success: function (res) {
 					console.log(res);
@@ -409,11 +411,9 @@ $('.edit_variant').click(function(){
           $('#mrp').val(obj.mrp);
           $('#selling_rate').val(obj.selling_rate);
           $('#size').val(obj.size_id);
-
           $('#metal').val(obj.metal_id);
-
 		  $('#diamond_type').val(obj.diamond_type_id);
-         
+          $('input[name="productid"]').val(productid);
 					},
 					});	 
 		}
@@ -422,4 +422,6 @@ $('.edit_variant').click(function(){
   $(document).on('click', '.close, .btn-secondary', function () {
     $('#editvariant_modal').modal('hide');
 });
+
+  
     </script>

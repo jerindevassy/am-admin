@@ -126,6 +126,7 @@ Route::post('/subbannerfetch', [App\Http\Controllers\HomeController::class, 'sub
 Route::post('/subbanneredit', [App\Http\Controllers\HomeController::class, 'subbanneredit'])->name('subbanneredit');
 
 Route::get('/varients/{productId}/{productname}', [App\Http\Controllers\HomeController::class, 'varients'])->name('varients');
-Route::post('/variantsfetch', [App\Http\Controllers\HomeController::class, 'variantsrfetch'])->name('variantsfetch');
+Route::post('/variantsfetch', [App\Http\Controllers\HomeController::class, 'variantsfetch'])->name('variantsfetch');
+Route::post('/variantsinsert', [App\Http\Controllers\HomeController::class, 'variantsinsert'])->name('variantsinsert');
 
 Route::post('/variantsedit', [App\Http\Controllers\HomeController::class, 'variantsedit'])->name('variantsedit');

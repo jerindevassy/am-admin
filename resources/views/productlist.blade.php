@@ -82,7 +82,7 @@
    </td>
    <td style="width: 50px;">
 
-<a href="{{ route('varients', ['productId' => $key->id, 'productname' => $key->product_name]) }}" class="btn btn-success btn-sm order_trans">Add Varients</a>
+<a href="{{ route('varients', ['productId' => $key->id, 'productname' => $key->product_name]) }}" class="btn btn-success btn-sm order_trans">Add Variants</a>
 
 </td>
  

@@ -16,8 +16,8 @@ use App\Models\Banner;
 use App\Models\products;
 use App\Models\product_images;
 use App\Models\Subbanner;
-use App\Models\product_variant;
-
+use App\Models\ProductVariant;
+use App\Models\ProductPropertie;
 use Hash;
 use Auth;
 
@@ -691,22 +691,48 @@ class HomeController extends Controller
          public function variantsfetch(Request $request)
          {
              $id = $request->id;
-             $product =product_variant::find($id);
+             $product =ProductVariant::find($id);
              print_r(json_encode($product));
          }   
          public function variantsedit(Request $request){
              $id=$request->id;
-             $product=product_variant::find($id);  
+             $product=ProductVariant::find($id);  
              $product->mrp = $request->mrp;
              $product->selling_rate = $request->selling_rate;
-             $product->product_id = $request->productid;
+             $product_id = $request->input('productid');
              $product->metal_id= $request->metal;
              $product->size_id= $request->size;
              $product->diamond_type_id = $request->diamond_type;
              $product->save();
-             return redirect('productlist')->with('success','Product Variants Edited Successfully');
+             return back()->with('success','Product Variants Edited Successfully');
          } 
 
+         public function variantsinsert(Request $request)
+         {
+             $product = new ProductVariant();
+             $product->mrp = $request->mrp;
+             $product->selling_rate = $request->selling_rate;
+             $product->product_id = $request->input('productid');
+             $product->metal_id = $request->metal[0] ?? null;
+             $product->size_id = $request->size;
+             $product->diamond_type_id = $request->diamond_type;
+             $product->save();
+         
+             if ($request->has('metal') && is_array($request->metal)) {
+                 foreach ($request->metal as $index => $metal_id) {
+                     $products = new ProductPropertie();
+                     $products->weight = $request->weight[$index] ?? null;
+                     $products->purity = $request->purity[$index] ?? null;
+                     $products->diamension = $request->dimension[$index] ?? null;
+                     $products->product_id = $request->input('productid');
+                     $products->metal_id = $metal_id;
+                     $products->save();
+                 }
+             }
+         
+             return back()->with('success', 'Variants added successfully.');
+         }
+         
     
     public function logout(){
         Auth::logout();

@@ -34,7 +34,7 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h5>Varients</h5>
+                <h5>Variants</h5>
               
               </div>
               <div class="card-body">
@@ -43,20 +43,20 @@
 
                 <p align="right">
 
- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">Add Varients</button>
+ <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">Add Variants</button>
  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-<form method="POST"  id="form1" action="{{url('variantsedit')}}"  enctype="multipart/form-data">
+<form method="POST"  id="form1" action="{{url('variantsinsert')}}"  enctype="multipart/form-data">
 
 @csrf
 
-<div class="modal-dialog" role="document" style="width:80%;">
+<div class="modal-dialog modal-lg" role="document" style="width:80%;">
 
 <div class="modal-content">
 
 <div class="modal-header">
 
-<h5 class="modal-title" id="exampleModalLabel">Add Varients</h5>
+<h5 class="modal-title" id="exampleModalLabel">Add Variants</h5>
 
 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
@@ -69,16 +69,73 @@
 <div class="modal-body row">
 <input type="hidden" value="{{$productId}}" name="productid">
 
-
-                      <div class="form-group col-sm-12">
-                                       <label class="exampleModalLabel">SubCategory Name</label>
-                                       <input type="text" class="form-control" name="subcategory_name" placeholder="Enter SubCategory Name" required>
-                                    </div> 
-                      <div class="form-group col-sm-6">
-                                       <label class="exampleModalLabel">SubCategory Image</label>
-                                       <input type="file" name="subcategoryimage" accept="image/*" required>
-                                       <small class="form-text text-muted">Recommended size: 500 × 300 pixels</small>
-                                    </div> 
+<div class="form-group col-sm-4">
+<label class="exampleModalLabel">Size</label>
+<select name="size"  class="form-control" required>
+<option value=""disabled selected>Select Size</option>
+@foreach($size as $sizee)
+            <option value="{{ $sizee->id }}">{{ $sizee->size }}</option>
+        @endforeach
+</select>
+</div>
+<div class="form-group col-sm-4">
+<label class="exampleModalLabel">Metal</label>
+<select name="metal"  class="form-control" required>
+<option value=""disabled selected>Select Metal</option>
+@foreach($metal as $metals)
+            <option value="{{ $metals->id }}">{{ $metals->name }}</option>
+        @endforeach
+</select>
+</div><div class="form-group col-sm-4">
+<label class="exampleModalLabel">Diamond Type</label>
+<select name="diamond_type"  class="form-control" required>
+<option value=""disabled selected>Select Diamond Type</option>
+@foreach($diamond as $types)
+            <option value="{{ $types->id }}">{{ $types->type }}</option>
+        @endforeach
+</select>
+</div>
+<div class="form-group col-sm-6">
+    <label class="exampleModalLabel">MRP</label>
+    
+    <input class="form-control" name="mrp"  placeholder="Enter MRP" required>
+ 
+</div><div class="form-group col-sm-6">
+    <label class="exampleModalLabel">Selling Rate</label>
+    
+    <input class="form-control" name="selling_rate" placeholder="Enter Selling Rate" required>
+ 
+</div>
+<div class="container mt-4">
+    <div id="metal_rows">
+        <div class="form-row align-items-end metal_row">
+            <div class="form-group col-md-3">
+                <label class="exampleModalLabel">Metal</label>
+                <select name="metal[]" class="form-control" required>
+                    <option value="" disabled selected>Select Metal</option>
+                    @foreach($metal as $metalss)
+                        <option value="{{ $metalss->id }}">{{ $metalss->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="exampleModalLabel">Dimension</label>
+                <input class="form-control" name="dimension[]" placeholder="Enter Dimension" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="exampleModalLabel">Weight</label>
+                <input class="form-control" name="weight[]" placeholder="Enter Weight" required>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="exampleModalLabel">Purity</label>
+                <input class="form-control" name="purity[]" placeholder="Enter Purity" required>
+            </div>
+            <div class="form-group col-md-1">
+                <button type="button" class="btn btn-success addRow">+</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 <div class="modal-footer">
@@ -164,9 +221,11 @@
         </button>
         
       </div>
-      <form method="POST" action="" enctype="multipart/form-data" name="variantedit">
+      <form method="POST" action="{{url('variantsedit')}}" enctype="multipart/form-data" name="variantedit">
 
 @csrf
+<input type="hidden" value="{{$productId}}" name="productid">
+
       <div class="modal-body row">
 <input type="hidden" name="id" id="variantid">
 <div class="form-group col-sm-12">
@@ -238,5 +297,43 @@
     </section>
 
     <!-- /.content -->
+   
+    
+  </div> 
+  <script>
+  $(document).ready(function () {
+    // Add new row
+    $(document).on('click', '.addRow', function () {
+        var html = `
+        <div class="form-row align-items-end metal_row">
+            <div class="form-group col-md-3">
+                <select name="metal[]" class="form-control" required>
+                    <option value="" disabled selected>Select Metal</option>
+                    @foreach($metal as $metalss)
+                        <option value="{{ $metalss->id }}">{{ $metalss->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" name="dimension[]" placeholder="Enter Dimension" required>
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" name="weight[]" placeholder="Enter Weight" required>
+            </div>
+            <div class="form-group col-md-2">
+                <input class="form-control" name="purity[]" placeholder="Enter Purity" required>
+            </div>
+            <div class="form-group col-md-1">
+                <button type="button" class="btn btn-danger removeRow">X</button>
+            </div>
+        </div>`;
+        
+        $('#metal_rows').append(html);
+    });
 
-  </div> @endsection
+    // Remove row
+    $(document).on('click', '.removeRow', function () {
+        $(this).closest('.metal_row').remove();
+    });
+});
+</script>@endsection
