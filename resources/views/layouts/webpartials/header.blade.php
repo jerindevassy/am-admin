@@ -41,7 +41,7 @@
 @endauth -->
 @auth
     <a href="{{ url('profile') }}" style="display: flex; align-items: center; text-decoration: none; color: black;">
-        <img src="https://amokha.com/public/web/assets/profileicon.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;">
+        <img src="https://amokha.com/web/assets/profileicon.png"  alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;">
         <p style="margin: 0;">{{ Auth::user()->name }}!</p>
     </a>
 @endauth
